@@ -1,0 +1,26 @@
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+      # only containers with co.elastic.logs/enabled: true will be discovered
+      hints.default_config.enabled: false
+output:
+  elasticsearch:
+    hosts: ["elasticsearch:9200"]
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /logs/*.log
+    processors:
+      - decode_json_fields:
+          fields: ["message"]
+          target: ""
+
+logging.level: error # Set the default log level for Filebeat
+logging.selectors: ["*"]
+
+# Adjust the monitoring log level to a higher level to suppress INFO messages
+logging.metrics.enabled: true
+logging.metrics.period: 30s
+logging.metrics.level: error # or warning, or none

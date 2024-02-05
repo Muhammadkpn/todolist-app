@@ -1,0 +1,19 @@
+{
+    "priority": 2,
+    "request": {
+        "method": "GET",
+        "url": "/v1/animal/2",
+        "headers": {
+            "Content-Type" : {
+                "equalTo" : "application/json"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "bodyFileName": "animals/success-2.json"
+    }
+}

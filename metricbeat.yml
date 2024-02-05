@@ -1,0 +1,13 @@
+metricbeat.modules:
+  - module: prometheus
+    metricsets: ["collector"]
+    enabled: true
+    period: 10s
+    hosts: ["app:3031"]
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+setup.ilm.enabled: false
+monitoring.enabled: true
+setup.template.settings:
+  index.number_of_shards: 1
+  index.codec: best_compression

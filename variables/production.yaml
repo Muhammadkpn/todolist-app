@@ -1,0 +1,15 @@
+app:
+  port: 3031
+  host: person.host
+  write_timeout: 15
+  read_timeout: 15
+
+database:
+  host: db.host
+  port: 5432
+  username: admin
+  password: admin
+  schema: template
+
+feature_flag:
+  use_gorm: true

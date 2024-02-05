@@ -1,0 +1,13 @@
+app:
+  name: sample-project
+  version: 1.0.0
+  base-path: sample-project
+  port: 3031
+  gracefull-duration: 10s
+
+database:
+  host: localhost
+  port: 6543
+  username: admin
+  password: admin
+  schema: template

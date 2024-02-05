@@ -1,0 +1,7 @@
+additional-imports:
+  - package: base/internal/inbound/model
+    alias: .
+generate:
+  echo-server: true
+  strict-server: true
+  embedded-spec: true

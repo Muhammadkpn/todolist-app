@@ -1,0 +1,20 @@
+{
+    "priority": 3,
+    "request": {
+      "method": "GET",
+      "urlPattern": "/v1/animal/([0-9]+)",
+      "headers": {
+        "Content-Type": {
+          "equalTo": "application/json"
+        }
+      }
+    },
+    "response": {
+      "status": 404,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "bodyFileName": "animals/error.json"
+    }
+}
+  

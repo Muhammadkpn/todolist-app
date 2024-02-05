@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS task (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255),
+  status INT DEFAULT 1
+);

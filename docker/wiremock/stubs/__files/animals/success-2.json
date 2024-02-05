@@ -1,0 +1,9 @@
+{
+    "status": 200,
+    "message": "Success",
+    "data": {
+        "id": 2,
+        "name": "cowwy",
+        "expense": 100000
+    }
+}
