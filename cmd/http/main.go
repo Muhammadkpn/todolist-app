@@ -7,8 +7,8 @@ import (
 	pkgDi "base/pkg/di"
 	pkgResource "base/pkg/resource"
 
-	sdkRunner "github.com/fericosali/sdk/appRunner"
-	sdkServer "github.com/fericosali/sdk/appRunner/server"
+	sdkRunner "gitlab.banksinarmas.com/go/sdkv2/appRunner"
+	sdkServer "gitlab.banksinarmas.com/go/sdkv2/appRunner/server"
 	"go.uber.org/dig"
 )
 

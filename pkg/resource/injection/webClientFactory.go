@@ -1,8 +1,8 @@
 package injection
 
 import (
-	sdkHeimdall "github.com/fericosali/sdk/webClient/integration/heimdall"
-	sdkWebClient "github.com/fericosali/sdk/webClient/webClient"
+	sdkHeimdall "gitlab.banksinarmas.com/go/sdkv2/webClient/integration/heimdall"
+	sdkWebClient "gitlab.banksinarmas.com/go/sdkv2/webClient/webClient"
 )
 
 func NewWebClientFactory() sdkWebClient.Factory {

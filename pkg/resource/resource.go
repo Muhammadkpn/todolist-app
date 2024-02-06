@@ -3,8 +3,8 @@ package resource
 import (
 	pkgConfig "base/pkg/config"
 
-	sdklog "github.com/fericosali/sdk/log"
-	sdkWebClient "github.com/fericosali/sdk/webClient/webClient"
+	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
+	sdkWebClient "gitlab.banksinarmas.com/go/sdkv2/webClient/webClient"
 	"go.uber.org/dig"
 )
 

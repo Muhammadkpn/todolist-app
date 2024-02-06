@@ -1,7 +1,7 @@
 package injection
 
 import (
-	sdklog "github.com/fericosali/sdk/log"
+	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
 )
 
 func InitSdkLog() sdklog.Logger {

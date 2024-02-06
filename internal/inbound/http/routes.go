@@ -5,7 +5,7 @@ import (
 	"base/internal/inbound/http/task"
 	pkgResource "base/pkg/resource"
 
-	sdkHttpMiddleware "github.com/fericosali/sdk/appRunner/middleware/http"
+	sdkHttpMiddleware "gitlab.banksinarmas.com/go/sdkv2/appRunner/middleware/http"
 
 	"github.com/labstack/echo/v4"
 	"go.uber.org/dig"
