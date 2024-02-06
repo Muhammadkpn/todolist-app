@@ -4,9 +4,17 @@ This Golang boilerplate is designed to kickstart your project development using 
 
 ## Requirements
 
-- [Go](https://golang.org/dl/) (Minimum version: 1.13)
+- [Go](https://golang.org/dl/) (Minimum version: 1.20)
 - [Docker](https://www.docker.com/) (Optional but recommended for database and elk setup)
 - [Docker Compose](https://docs.docker.com/compose/) (Optional but recommended for local development with Docker)
+
+## Key Features
+
+- OpenAPI based contract for consistency, mock, and auto generate controller
+- Dependency Injection with Uber/Dig
+- ORM and Database Transactions using Gorm
+- Tracing via APM
+- Logging via Uber/Zap
 
 ## Getting Started
 
@@ -100,6 +108,5 @@ The project structure follows the clean architecture principles:
 ## List of Main Framework and Library
 
 1. [Sinarmas SDK](https://gitlab.banksinarmas.com/go/sdk) - Sinarmas Golang SDK(contains logger, tracer, mandatory)
-2. [Echo](https://github.com/labstack/echo) - HTTP web framework
-3. [Gorm](https://gorm.io/docs/index.html) - Object Relational Mapping (ORM) library
-4. [Apm](https://github.com/elastic/apm-agent-go) - Observability framework
+2. [Gorm](https://gorm.io/docs/index.html) - Object Relational Mapping (ORM) library
+3. [Apm](https://github.com/elastic/apm-agent-go) - Observability framework

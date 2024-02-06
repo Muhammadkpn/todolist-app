@@ -14,37 +14,102 @@ paths:
       tags: []
       responses:
         "200":
-          description: Task created
+          description: Success
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    title:
-                      type: string
-                    status:
-                      type: integer
+                type: object
                 x-examples:
                   Example 1:
-                    - id: 1
-                      title: test
-                      status: 1
-                    - id: 2
-                      title: booo
-                      status: 1
+                    success: false
+                    message: error getting task
+                    process_time: 1.501
+                    data:
+                      - id: 1
+                        title: daily standup
+                        status: 0
+                      - id: 1
+                        title: create time table
+                        status: 1
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  process_time:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
               examples:
                 Example 1:
                   value:
-                    - id: 1
-                      title: test
-                      status: 1
-                    - id: 2
-                      title: booo
-                      status: 1
+                    success: true
+                    message: success get tasks
+                    process_time: 1.501
+                    data:
+                      - id: 1
+                        title: daily standup
+                        status: 0
+                      - id: 1
+                        title: create time table
+                        status: 1
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  process_time:
+                    type: number
+                x-examples:
+                  Example 1:
+                    success: true
+                    message: success get tasks
+                    process_time: 1.501
+              examples:
+                Example 1:
+                  value:
+                    success: false
+                    message: endpoint not found
+                    process_time: 0
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response_header:
+                    type: object
+                    x-stoplight:
+                      id: rf0f4xc3332qo
+                    properties:
+                      success:
+                        type: boolean
+                        x-stoplight:
+                          id: dync8mp4wjoug
+                      message:
+                        type: string
+                        x-stoplight:
+                          id: obkr1ytitc4qq
+                      process_time:
+                        type: integer
+                        x-stoplight:
+                          id: phn9dw16o40er
+              examples:
+                Example 1:
+                  value:
+                    response_header:
+                      success: false
+                      message: error getting tasks
+                      process_time: 0
       operationId: get-tasks
       x-stoplight:
         id: oqfrdy44c609p
@@ -78,7 +143,7 @@ paths:
   "/tasks/:{taskId}":
     parameters:
       - schema:
-          type: integer
+          type: number
         name: taskId
         in: path
         required: true
@@ -158,3 +223,13 @@ components:
           x-stoplight:
             id: 1ewevm6jvwqhd
       description: Model for task
+  responses:
+    taskresponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Task"
+x-internal: false
