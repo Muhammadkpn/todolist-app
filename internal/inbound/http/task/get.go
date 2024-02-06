@@ -1,6 +1,7 @@
 package task
 
 import (
+	"base/internal/inbound/model"
 	"base/internal/util"
 	"context"
 
@@ -11,12 +12,21 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
 
-	// tasks, err := c.Task.GetAllTasks(ctx)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	tasks, err := c.Task.GetAllTasks(ctx)
+	if err != nil {
+		return nil, err
+	}
 
-	// var res GetTasks200JSONResponse
+	var res GetTasks200JSONResponse
+
+	for _, task := range tasks {
+		taskID := int(task.ID)
+		*res.Data = append(*res.Data, model.Task{
+			Id:     &taskID,
+			Status: &task.Status,
+			Title:  &task.Title,
+		})
+	}
 
 	// for _, task := range tasks {
 	// 	ID := int(task.ID)
