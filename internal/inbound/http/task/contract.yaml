@@ -120,16 +120,28 @@ paths:
   "/tasks/:{taskId}":
     parameters:
       - schema:
-          type: number
+          type: integer
+          format: int64
         name: taskId
         in: path
-        required: true
         description: existing task id to be find
+        required: true
     get:
       summary: Get specific task by id
       responses:
         "200":
-          $ref: "#/components/responses/BaseResponse"
+          description: Shared Response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/baseResponse"
+                  - type: object
+                    x-stoplight:
+                      id: d0w1se1ialpql
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Task"
         "500":
           description: Shared Response
           content:
@@ -191,11 +203,13 @@ components:
       x-stoplight:
         id: 6ik83chrljzbx
       type: object
+      description: Model for task
       properties:
         id:
           type: integer
           x-stoplight:
             id: 4jpc8wh7caqgc
+          format: int64
         title:
           type: string
           x-stoplight:
@@ -204,7 +218,6 @@ components:
           type: integer
           x-stoplight:
             id: 1ewevm6jvwqhd
-      description: Model for task
     baseResponse:
       title: Base Response
       x-stoplight:
