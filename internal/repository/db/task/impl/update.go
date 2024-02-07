@@ -6,7 +6,7 @@ import (
 	"context"
 )
 
-func (r *repository) UpdateTask(id int, title string) (task model.Task, err error) {
+func (r *repository) UpdateTask(id int64, title string) (task model.Task, err error) {
 	_, err = r.Db.ExecContext(context.Background(), constant.UpdateTaskQuery, id, title)
 
 	return

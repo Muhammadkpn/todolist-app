@@ -41,7 +41,7 @@ func (r *repository) GetAllTasks(ctx context.Context) (tasks []model.Task, err e
 	return
 }
 
-func (r *repository) GetTaskByID(id int) (task model.Task, err error) {
+func (r *repository) GetTaskByID(id int64) (task model.Task, err error) {
 	err = r.Db.Get(&task, constant.GetTaskByIDQuery, id)
 
 	return

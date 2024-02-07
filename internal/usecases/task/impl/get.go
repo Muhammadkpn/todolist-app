@@ -116,7 +116,7 @@ func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err erro
 // 	return
 // }
 
-func (u *usecase) GetTaskByID(ctx context.Context, id int) (task model.Task, err error) {
+func (u *usecase) GetTaskByID(ctx context.Context, id int64) (task model.Task, err error) {
 	span, _ := apm.StartSpan(ctx, "usecase", "GetTaskByID")
 	defer span.End()
 
