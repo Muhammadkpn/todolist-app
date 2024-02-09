@@ -11,6 +11,10 @@ import (
 func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject) (GetTasksResponseObject, error) {
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
+	asd := "asd"
+	return GetTasks200JSONResponse{
+		ErrorMessage: &asd,
+	}, nil
 
 	tasks, err := c.Task.GetAllTasks(ctx)
 	if err != nil {

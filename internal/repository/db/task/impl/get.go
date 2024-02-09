@@ -3,7 +3,6 @@ package impl
 import (
 	"base/internal/repository/db/model"
 	"base/internal/util"
-	"base/pkg/constant"
 	"context"
 )
 
@@ -42,7 +41,7 @@ func (r *repository) GetAllTasks(ctx context.Context) (tasks []model.Task, err e
 }
 
 func (r *repository) GetTaskByID(id int64) (task model.Task, err error) {
-	err = r.Db.Get(&task, constant.GetTaskByIDQuery, id)
+	// err = r.Db.Get(&task, constant.GetTaskByIDQuery, id)
 
 	return
 }

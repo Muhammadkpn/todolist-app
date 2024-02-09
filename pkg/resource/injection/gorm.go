@@ -11,6 +11,9 @@ import (
 func InitGorm(cfg pkgConfig.Config) (db *gorm.DB, err error) {
 	connectionString := cfg.Database.GenerateConnectionString()
 	db, err = gorm.Open(postgres.Open(connectionString), &gorm.Config{})
+	if err != nil {
+		return nil, nil
+	}
 
 	return
 }

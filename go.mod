@@ -1,12 +1,10 @@
 module base
 
-go 1.21.5
+go 1.20
 
 require (
 	github.com/getkin/kin-openapi v0.123.0
-	github.com/jmoiron/sqlx v1.3.5
 	github.com/labstack/echo/v4 v4.11.4
-	github.com/lib/pq v1.3.0
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/stretchr/testify v1.8.4
 	gitlab.banksinarmas.com/go/sdkv2 v0.0.0-20240206024938-29852fad8e9c
@@ -33,14 +31,15 @@ require (
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/invopop/yaml v0.2.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
-	github.com/jackc/pgconn v1.7.0 // indirect
+	github.com/jackc/pgconn v1.14.0 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
-	github.com/jackc/pgproto3/v2 v2.0.5 // indirect
+	github.com/jackc/pgproto3/v2 v2.3.2 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
-	github.com/jackc/pgtype v1.5.0 // indirect
-	github.com/jackc/pgx/v4 v4.9.0 // indirect
-	github.com/jackc/pgx/v5 v5.4.3 // indirect
+	github.com/jackc/pgtype v1.14.0 // indirect
+	github.com/jackc/pgx/v4 v4.18.1 // indirect
+	github.com/jackc/pgx/v5 v5.5.2 // indirect
+	github.com/jackc/puddle/v2 v2.2.1 // indirect
 	github.com/jcchavezs/porto v0.1.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
@@ -50,6 +49,7 @@ require (
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-sqlite3 v1.14.6 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -66,16 +66,16 @@ require (
 	go.elastic.co/fastjson v1.1.0 // indirect
 	go.uber.org/atomic v1.6.0 // indirect
 	go.uber.org/multierr v1.5.0 // indirect
-	go.uber.org/zap v1.10.0 // indirect
+	go.uber.org/zap v1.13.0 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
+	golang.org/x/sync v0.3.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.12.0 // indirect
-	golang.org/x/xerrors v0.0.0-20220411194840-2f41105eb62f // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/postgres v1.5.4 // indirect
 	howett.net/plist v0.0.0-20181124034731-591f970eefbb // indirect
