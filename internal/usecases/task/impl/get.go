@@ -4,6 +4,7 @@ import (
 	"base/internal/usecases/model"
 	"base/internal/util"
 	"context"
+	"time"
 
 	"go.elastic.co/apm"
 )
@@ -20,6 +21,8 @@ import (
 func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err error) {
 	span, ctx := util.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
+
+	time.Sleep(2 * time.Second)
 
 	res, err := u.TaskRepository.GetAllTasks(ctx)
 	if err != nil {

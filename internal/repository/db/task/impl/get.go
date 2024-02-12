@@ -4,11 +4,14 @@ import (
 	"base/internal/repository/db/model"
 	"base/internal/util"
 	"context"
+	"time"
 )
 
 func (r *repository) GetAllTasks(ctx context.Context) (tasks []model.Task, err error) {
 	span, ctx := util.UpdateCtxSpanRepository(ctx)
 	defer span.End()
+
+	time.Sleep(1 * time.Second)
 
 	db := r.DbGorm.WithContext(ctx)
 	result := db.Table("task").Where("status = ?", 1).Find(&tasks)

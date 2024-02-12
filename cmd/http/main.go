@@ -1,16 +1,12 @@
 package main
 
 import (
-	"context"
-	"fmt"
-
 	"base/internal/inbound"
 	pkgDi "base/pkg/di"
 	pkgResource "base/pkg/resource"
 
 	sdkRunner "gitlab.banksinarmas.com/go/sdkv2/appRunner"
 	sdkServer "gitlab.banksinarmas.com/go/sdkv2/appRunner/server"
-	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
 	"go.uber.org/dig"
 )
 
@@ -27,16 +23,15 @@ func Run(containerCall ContainerCall, invoke Invoke, onError InvokeError) error 
 	if err != nil {
 		return err
 	}
-	fmt.Println("asdfq")
+
 	if err := invoke(container); err != nil {
 		onError(container, err)
 	}
-	fmt.Println("asdqqq")
+
 	return nil
 }
 
 func run(container *dig.Container) error {
-	fmt.Println("aasdakqodkqo")
 	return container.Invoke(func(inbound inbound.Inbound, resource pkgResource.Resource) error {
 		// Initializes and starts an HTTP server with the specified port
 		appCfg := resource.Config.AppConfig
@@ -47,8 +42,6 @@ func run(container *dig.Container) error {
 				sdkServer.WithHttpRegister(inbound.Http.Routes),
 			)).
 			Run()
-
-		fmt.Println("masuk")
 
 		return nil
 	})
@@ -64,7 +57,6 @@ func onError(container *dig.Container, err error) {
 		}
 		return nil
 	})
-	fmt.Println(err.Error())
 }
 
 // The main function serves as the entry point for the application.
@@ -74,8 +66,4 @@ func main() {
 	if err := Run(pkgDi.Container, run, onError); err != nil {
 		panic(err)
 	}
-
-	sdklog.Debug(context.Background(), "masuk log")
-
-	fmt.Println("asd")
 }

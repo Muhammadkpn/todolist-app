@@ -2,24 +2,24 @@ package util
 
 import (
 	"context"
-	"fmt"
 	"runtime"
 	"strings"
 
+	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
 	"go.elastic.co/apm"
 )
 
 func GetCurrentFuncName() string {
 	pc, _, _, ok := runtime.Caller(2)
 	if !ok {
-		fmt.Println("[GetCurrentFuncName]Failed to get caller information")
+		sdklog.Debug(context.Background(), "[GetCurrentFuncName]Failed to get caller information")
 
 		return ""
 	}
 
 	funcObj := runtime.FuncForPC(pc)
 	if funcObj == nil {
-		fmt.Println("[GetCurrentFuncName]Failed to get function object")
+		sdklog.Debug(context.Background(), "[GetCurrentFuncName]Failed to get function object")
 
 		return ""
 	}
