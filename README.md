@@ -6,15 +6,14 @@ This Golang boilerplate is designed to kickstart your project development using 
 
 - [Go](https://golang.org/dl/) (Minimum version: 1.20)
 - [Docker](https://www.docker.com/) (Optional but recommended for database and elk setup)
-- [Docker Compose](https://docs.docker.com/compose/) (Optional but recommended for local development with Docker)
 
 ## Key Features
 
-- OpenAPI based contract for consistency, mock, and auto generate controller
-- Dependency Injection with Uber/Dig
-- ORM and Database Transactions using Gorm
-- Tracing via APM
-- Logging via Uber/Zap
+- OpenAPI based contract for consistency, mock, and auto generate controller with [stoplight.io](https://stoplight.io/)
+- Dependency Injection with [Uber/Dig](https://github.com/uber-go/dig)
+- ORM and Database Transactions using [Gorm](https://gorm.io/docs/index.html)
+- Tracing via [APM](https://github.com/elastic/apm-agent-go)
+- Logging via [Uber/Zap](https://github.com/uber-go/zap)
 
 ## Getting Started
 
@@ -105,8 +104,41 @@ The project structure follows the clean architecture principles:
     └── production.yaml
 ```
 
-## List of Main Framework and Library
+## How to Use
 
-1. [Sinarmas SDK](https://gitlab.banksinarmas.com/go/sdk) - Sinarmas Golang SDK(contains logger, tracer, mandatory)
-2. [Gorm](https://gorm.io/docs/index.html) - Object Relational Mapping (ORM) library
-3. [Apm](https://github.com/elastic/apm-agent-go) - Observability framework
+**1. Define your API Contract:**
+
+Create an OpenAPI specification file named `contract.yaml` within the `./internal/inbound/http/{{your_module}}` directory. Ensure this file aligns with stakeholder expectations and represents the desired API behaviors. You can use tools like Stoplight.io to create and collaborate on this file (creating a free account is required). Guideline to make contract in [here](https://docs.google.com/document/d/1aQeGRRN2Z9am_MhHYKd7r6JdTiy004UbbvfbH_TR7iw/edit?usp=sharing).
+
+**2. Generate Server Code:**
+
+After placing the `contract.yaml` file, run the generator script with `./scripts/http.sh`. This will generate an `openapi_server.gen.go` file in the same directory, containing server-side code based on your API contract.
+
+**3. Implement your Controller:**
+
+Create a `controller.go` file within the same module folder. Define a `Controller` struct that injects any necessary dependencies (indicated by `{{add dependencies here}}`). Additionally, ensure it implements the `StrictServerInterface` interface found in the generated `openapi_server.gen.go` file.
+
+```go
+type Controller struct {
+        dig.In
+        {{add dependencies here}}
+    }
+
+    var _ StrictServerInterface = (*Controller)(nil)
+```
+
+**4. Implement Controller Functions:**
+
+Inside the generated `openapi_server.gen.go` file, implement the actual logic for each controller function defined in the `StrictServerInterface`. These functions correspond to the endpoints specified in your `contract.yaml` file.
+
+**5. Add Use Cases and Repositories:**
+
+Create separate folders for use cases and repositories as needed to encapsulate business logic and data access concerns. Implement the required functionalities within these folders to complete your application.
+
+**Additional Notes:**
+
+- Replace `{{your_module}}` with the actual name of your module directory.
+- Refer to the existing code and comments within the boilerplate for further guidance.
+- Consider including instructions on setting up dependencies and running the application.
+
+By following these steps and customizing the provided structure, you can quickly create Go applications with well-defined APIs and organized architecture.
