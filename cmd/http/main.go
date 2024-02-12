@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"base/internal/inbound"
 	pkgDi "base/pkg/di"
 	pkgResource "base/pkg/resource"
@@ -25,9 +23,11 @@ func Run(containerCall ContainerCall, invoke Invoke, onError InvokeError) error 
 	if err != nil {
 		return err
 	}
+
 	if err := invoke(container); err != nil {
 		onError(container, err)
 	}
+
 	return nil
 }
 
@@ -57,7 +57,6 @@ func onError(container *dig.Container, err error) {
 		}
 		return nil
 	})
-	fmt.Println(err.Error())
 }
 
 // The main function serves as the entry point for the application.

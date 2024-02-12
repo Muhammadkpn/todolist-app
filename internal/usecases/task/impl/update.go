@@ -14,7 +14,7 @@ import (
 // 	"go.elastic.co/apm"
 // )
 
-func (u *usecase) UpdateTask(ctx context.Context, id int, title string) (task model.Task, err error) {
+func (u *usecase) UpdateTask(ctx context.Context, id int64, title string) (task model.Task, err error) {
 	span, _ := apm.StartSpan(ctx, "usecase", "UpdateTask")
 	defer span.End()
 

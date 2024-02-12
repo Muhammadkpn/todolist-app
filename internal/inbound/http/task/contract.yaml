@@ -1,108 +1,63 @@
 openapi: 3.0.0
+tags:
+  - name: Tasks
+    description: API operations related to tasks
 x-stoplight:
   id: hv9aajgmhu4sd
 info:
   title: Template
   version: "1.0"
   description: endpoint list for task
+  license:
+    name: Your License Name
+    url: "https://example.com/license"
+  contact:
+    name: Your Name
+    email: your.email@example.com
+    url: example.com
 servers:
   - url: "http://localhost:3000"
 paths:
   /tasks:
     get:
       summary: Get all tasks
-      tags: []
       responses:
         "200":
-          description: Success
+          description: Shared Response
           content:
             application/json:
               schema:
-                type: object
-                x-examples:
-                  Example 1:
-                    success: false
-                    message: error getting task
-                    process_time: 1.501
-                    data:
-                      - id: 1
-                        title: daily standup
-                        status: 0
-                      - id: 1
-                        title: create time table
-                        status: 1
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  process_time:
-                    type: number
-                  data:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Task"
+                allOf:
+                  - $ref: "#/components/schemas/baseResponse"
+                  - x-stoplight:
+                      id: nb66j29zb1t22
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: rsxhwlxaorsa7
+                        items:
+                          $ref: "#/components/schemas/Task"
               examples:
                 Example 1:
                   value:
-                    success: true
-                    message: success get tasks
-                    process_time: 1.501
+                    message: success
+                    timestamp: 1707190114
+                    process_time: 130
                     data:
                       - id: 1
+                        title: write timesheet
+                        status: 1
+                      - id: 2
                         title: daily standup
                         status: 0
-                      - id: 1
-                        title: create time table
-                        status: 1
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  process_time:
-                    type: number
-                x-examples:
-                  Example 1:
-                    success: true
-                    message: success get tasks
-                    process_time: 1.501
-              examples:
-                Example 1:
-                  value:
-                    success: false
-                    message: endpoint not found
-                    process_time: 0
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  response_header:
-                    type: object
-                    x-stoplight:
-                      id: rf0f4xc3332qo
-                    properties:
-                      success:
-                        type: boolean
-                        x-stoplight:
-                          id: dync8mp4wjoug
-                      message:
-                        type: string
-                        x-stoplight:
-                          id: obkr1ytitc4qq
-                      process_time:
-                        type: integer
-                        x-stoplight:
-                          id: phn9dw16o40er
+                $ref: "#/components/schemas/baseResponse"
               examples:
                 Example 1:
                   value:
@@ -120,6 +75,28 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/baseResponse"
+              examples:
+                Example 1:
+                  value:
+                    message: success
+                    timestamp: 1707190114
+                    process_time: 150
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/baseResponse"
+              examples:
+                Example 1:
+                  value:
+                    message: error
+                    timestamp: 1707190114
+                    process_time: 210
       x-stoplight:
         id: mloywbl6oucmp
       description: Add Task
@@ -143,37 +120,52 @@ paths:
   "/tasks/:{taskId}":
     parameters:
       - schema:
-          type: number
+          type: integer
+          format: int64
         name: taskId
         in: path
-        required: true
         description: existing task id to be find
+        required: true
     get:
       summary: Get specific task by id
-      tags: []
       responses:
         "200":
-          description: |-
-            {
-                "id": 1,
-                "title": "test",
-                "status": 1
-            }
+          description: Shared Response
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/baseResponse"
+                  - type: object
+                    x-stoplight:
+                      id: d0w1se1ialpql
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Task"
+        "500":
+          description: Shared Response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/baseResponse"
+              examples:
+                Example 1:
+                  value:
+                    message: string
+                    timestamp: 0
+                    process_time: 0
       operationId: get-tasks-taskId
       x-stoplight:
         id: a1h8yepfkwlh2
       parameters: []
+      description: Get specific task by task_id
     put:
       summary: Update task
-      tags: []
       responses:
         "200":
-          description: |-
-            {
-                "id": 1,
-                "title": "title baru",
-                "status": 1
-            }
+          $ref: "#/components/responses/BaseResponse"
+        "500":
+          $ref: "#/components/responses/BaseResponse"
       operationId: put-tasks-taskId
       x-stoplight:
         id: k9z4qowh5iuyu
@@ -192,12 +184,14 @@ paths:
               Example 1:
                 value:
                   title: title baru
+      description: Update task detail
     delete:
       summary: Delete task
-      tags: []
       responses:
         "200":
-          description: Success delete task
+          $ref: "#/components/responses/BaseResponse"
+        "500":
+          $ref: "#/components/responses/BaseResponse"
       operationId: delete-tasks-taskId
       x-stoplight:
         id: 2yfk80l989she
@@ -209,11 +203,13 @@ components:
       x-stoplight:
         id: 6ik83chrljzbx
       type: object
+      description: Model for task
       properties:
         id:
           type: integer
           x-stoplight:
             id: 4jpc8wh7caqgc
+          format: int64
         title:
           type: string
           x-stoplight:
@@ -222,14 +218,43 @@ components:
           type: integer
           x-stoplight:
             id: 1ewevm6jvwqhd
-      description: Model for task
+    baseResponse:
+      title: Base Response
+      x-stoplight:
+        id: 03wbo9cgnjofn
+      type: object
+      x-examples:
+        Example 1:
+          message: string
+          timestamp: 0
+          process_time: 0
+      properties:
+        error_code:
+          type: string
+          x-stoplight:
+            id: ip18nrnkuqm0r
+        error_message:
+          type: string
+          x-stoplight:
+            id: x1z7jh9sdutiu
   responses:
-    taskresponse:
+    BaseResponse:
       description: Example response
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: "#/components/schemas/Task"
+            $ref: "#/components/schemas/baseResponse"
+          examples:
+            Example 1:
+              value:
+                message: fail
+                timestamp: 1231230
+                process_time: 510
+                error_code: ""
+                custom_value: ""
+            Example 2:
+              value:
+                message: success
+                timestamp: 123123123
+                process_time: 10
 x-internal: false

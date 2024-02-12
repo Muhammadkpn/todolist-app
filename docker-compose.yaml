@@ -23,104 +23,104 @@ services:
     networks:
       - app-tier
 
-  # app:
-  #   container_name: person.host
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile # Make sure this points to your Dockerfile
-  #   ports:
-  #     - "3031:3031"
-  #   depends_on:
-  #     - db
-  #     - elasticsearch
-  #     - kibana
-  #     - filebeat
-  #     - apm-server
-  #   networks:
-  #     - app-tier
-  #   environment:
-  #     - ELASTIC_APM_LOG_FILE=stderr
-  #     - ELASTIC_APM_LOG_LEVEL=error
-  #     - ELASTIC_APM_SERVICE_NAME=templatev9
-  #     - ELASTIC_APM_SERVER_URL=http://apm-servertemplate:8200
-  #     - ENV=staging
-  #   volumes:
-  #     - ./:/app
-  #     - app-logs:/logs
+  app:
+    container_name: person.host
+    build:
+      context: .
+      dockerfile: Dockerfile # Make sure this points to your Dockerfile
+    ports:
+      - "3031:3031"
+    depends_on:
+      - db
+      - elasticsearch
+      - kibana
+      - filebeat
+      - apm-server
+    networks:
+      - app-tier
+    environment:
+      - ELASTIC_APM_LOG_FILE=stderr
+      - ELASTIC_APM_LOG_LEVEL=error
+      - ELASTIC_APM_SERVICE_NAME=templatev9
+      - ELASTIC_APM_SERVER_URL=http://apm-servertemplate:8200
+      - ENV=staging
+    volumes:
+      - ./:/app
+      - app-logs:/logs
 
-  # apm-server:
-  #   container_name: apm-servertemplate
-  #   image: docker.elastic.co/apm/apm-server:7.14.0
-  #   ports:
-  #     - 8200:8200
-  #   depends_on:
-  #     - elasticsearch
-  #     - kibana
-  #   environment:
-  #     - ELASTIC_APM_LOG_LEVEL=error
-  #   networks:
-  #     - app-tier
-  #   command: >
-  #     apm-server -e
-  #     -E apm-server.rum.enabled=true
-  #     -E setup.kibana.host=kibana:5601
-  #     -E setup.template.settings.index.number_of_replicas=0
-  #     -E apm-server.kibana.enabled=true
-  #     -E apm-server.kibana.host=kibana:5601
-  #     -E output.elasticsearch.hosts=["elasticsearch:9200"]
-  #     -E logging.level=error
+  apm-server:
+    container_name: apm-servertemplate
+    image: docker.elastic.co/apm/apm-server:7.14.0
+    ports:
+      - 8200:8200
+    depends_on:
+      - elasticsearch
+      - kibana
+    environment:
+      - ELASTIC_APM_LOG_LEVEL=error
+    networks:
+      - app-tier
+    command: >
+      apm-server -e
+      -E apm-server.rum.enabled=true
+      -E setup.kibana.host=kibana:5601
+      -E setup.template.settings.index.number_of_replicas=0
+      -E apm-server.kibana.enabled=true
+      -E apm-server.kibana.host=kibana:5601
+      -E output.elasticsearch.hosts=["elasticsearch:9200"]
+      -E logging.level=error
 
-  # elasticsearch:
-  #   container_name: elasticsearchtemplate
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
-  #   ports:
-  #     - 9200:9200
-  #   volumes:
-  #     - elasticsearch-data:/usr/share/elasticsearch/data
-  #   environment:
-  #     - xpack.monitoring.enabled=true
-  #     - xpack.watcher.enabled=false
-  #     - discovery.type=single-node
-  #     - cluster.routing.allocation.disk.watermark.low=85%
-  #     - cluster.routing.allocation.disk.watermark.high=90%
-  #     - cluster.routing.allocation.disk.watermark.flood_stage=95%
-  #   networks:
-  #     - app-tier
+  elasticsearch:
+    container_name: elasticsearchtemplate
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+    ports:
+      - 9200:9200
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - discovery.type=single-node
+      - cluster.routing.allocation.disk.watermark.low=85%
+      - cluster.routing.allocation.disk.watermark.high=90%
+      - cluster.routing.allocation.disk.watermark.flood_stage=95%
+    networks:
+      - app-tier
 
-  # kibana:
-  #   container_name: kibanatemplate
-  #   image: docker.elastic.co/kibana/kibana:7.14.0
-  #   ports:
-  #     - 5601:5601
-  #   depends_on:
-  #     - elasticsearch
-  #   environment:
-  #     - ELASTICSEARCH_URL=http://elasticsearch:9200
-  #     - xpack.apm.enabled=false
-  #     - xpack.infra.sources.default.metricAlias=metricbeat-*
-  #     - LOGGING_VERBOSE=false
-  #   networks:
-  #     - app-tier
-  #   command: >
-  #     kibana
-  #     --logging.events.log=["error","fatal"]
-  #     --logging.quiet=true
-  #     --logging.verbose=false
+  kibana:
+    container_name: kibanatemplate
+    image: docker.elastic.co/kibana/kibana:7.14.0
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - xpack.apm.enabled=false
+      - xpack.infra.sources.default.metricAlias=metricbeat-*
+      - LOGGING_VERBOSE=false
+    networks:
+      - app-tier
+    command: >
+      kibana
+      --logging.events.log=["error","fatal"]
+      --logging.quiet=true
+      --logging.verbose=false
 
-  # filebeat:
-  #   labels:
-  #     co.elastic.logs/enabled: true
-  #   depends_on:
-  #     - elasticsearch
-  #   user: root
-  #   image: docker.elastic.co/beats/filebeat:7.14.0
-  #   command: filebeat -e -strict.perms=false
-  #   volumes:
-  #     - ./filebeat.docker.yml:/usr/share/filebeat/filebeat.yml
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - app-logs:/logs:ro
-  #   networks:
-  #     - app-tier
+  filebeat:
+    labels:
+      co.elastic.logs/enabled: true
+    depends_on:
+      - elasticsearch
+    user: root
+    image: docker.elastic.co/beats/filebeat:7.14.0
+    command: filebeat -e -strict.perms=false
+    volumes:
+      - ./filebeat.docker.yml:/usr/share/filebeat/filebeat.yml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - app-logs:/logs:ro
+    networks:
+      - app-tier
 
   # # metricbeat:
   # #   image: docker.elastic.co/beats/metricbeat:7.14.0

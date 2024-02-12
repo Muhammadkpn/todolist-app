@@ -1,8 +1,10 @@
 package task
 
 import (
+	"base/internal/inbound/model"
 	"base/internal/util"
 	"context"
+	"time"
 
 	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
 )
@@ -10,41 +12,56 @@ import (
 func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject) (GetTasksResponseObject, error) {
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
+	time.Sleep(1 * time.Second)
 
-	// tasks, err := c.Task.GetAllTasks(ctx)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	tasks, err := c.Task.GetAllTasks(ctx)
+	if err != nil {
+		errCode := "asd"
+		errMsg := err.Error()
 
-	// var res GetTasks200JSONResponse
+		return GetTasks500JSONResponse{
+			ErrorCode:    &errCode,
+			ErrorMessage: &errMsg,
+		}, nil
+	}
 
-	// for _, task := range tasks {
-	// 	ID := int(task.ID)
+	var res GetTasks200JSONResponse
 
-	// 	res = append(res, struct {
-	// 		Id     *int    "json:\"id,omitempty\""
-	// 		Status *int    "json:\"status,omitempty\""
-	// 		Title  *string "json:\"title,omitempty\""
-	// 	}{
-	// 		Id:     &ID,
-	// 		Title:  &task.Title,
-	// 		Status: &task.Status,
-	// 	})
-	// }
+	for _, task := range tasks {
+		*res.Data = append(*res.Data, model.Task{
+			Id:     &task.ID,
+			Status: &task.Status,
+			Title:  &task.Title,
+		})
+	}
 
-	sdklog.Debug(context.Background(), "gogogogo")
+	sdklog.Debug(ctx, "gogogogo")
 
-	return nil, nil
+	return res, nil
 }
 
 func (c *Controller) GetTasksTaskId(ctx context.Context, request GetTasksTaskIdRequestObject) (GetTasksTaskIdResponseObject, error) {
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
 
-	// _, err := c.Task.GetTaskByID(ctx, request.TaskId)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	task, err := c.Task.GetTaskByID(ctx, request.TaskId)
+	if err != nil {
+		errCode := ""
+		errMsg := err.Error()
 
-	return nil, nil
+		return GetTasksTaskId500JSONResponse{
+			ErrorCode:    &errCode,
+			ErrorMessage: &errMsg,
+		}, nil
+	}
+
+	res := GetTasksTaskId200JSONResponse{
+		Data: &model.Task{
+			Id:     &task.ID,
+			Title:  &task.Title,
+			Status: &task.Status,
+		},
+	}
+
+	return res, nil
 }
