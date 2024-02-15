@@ -12,6 +12,10 @@ func Register(container *dig.Container) error {
 		return fmt.Errorf("[DI] cannot initialize Web Client Factory: %+v", err)
 	}
 
+	if err := container.Provide(injection.NewValidator); err != nil {
+		return fmt.Errorf("[DI] cannot initialize Validator: %+v", err)
+	}
+
 	if err := container.Provide(injection.InitGorm); err != nil {
 		return fmt.Errorf("[DI] cannot initialize Gorm: %+v", err)
 	}

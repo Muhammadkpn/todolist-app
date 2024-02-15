@@ -3,6 +3,7 @@ package http
 import (
 	"base/internal/inbound/http/petStore"
 	"base/internal/inbound/http/task"
+	"base/internal/inbound/http/user"
 	pkgResource "base/pkg/resource"
 
 	sdkHttpMiddleware "gitlab.banksinarmas.com/go/sdkv2/appRunner/middleware/http"
@@ -18,10 +19,12 @@ type Inbound struct {
 
 	PetStore petStore.Controller
 	Task     task.Controller
+	User     user.Controller
 }
 
 func (i Inbound) Routes(ec *echo.Echo) {
 	ec.Use(sdkHttpMiddleware.AppContext())
+	ec.Validator = i.Resource.Validator
 	base := ec.Group(i.Resource.Config.AppConfig.BasePath)
 
 	v1 := base.Group("/v1")
@@ -30,4 +33,7 @@ func (i Inbound) Routes(ec *echo.Echo) {
 
 	taskGroup := base.Group("")
 	task.RegisterHandlers(taskGroup, task.NewStrictHandler(&i.Task, nil))
+
+	userGroup := v1.Group("/user")
+	userGroup.POST("", i.User.AddUser)
 }
