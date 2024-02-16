@@ -6,6 +6,14 @@ This Golang boilerplate is designed to kickstart your project development using 
 
 - [Go](https://golang.org/dl/) (Minimum version: 1.20)
 - [Docker](https://www.docker.com/) (Optional but recommended for database and elk setup)
+- [Mockery](https://vektra.github.io/mockery/latest/installation) for generate mock
+  ```
+  go install github.com/vektra/mockery/v2@v2.41.0
+  ```
+- [OAPICodegen](https://github.com/deepmap/oapi-codegen) for generate openAPI contract into controller
+  ```
+  go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest
+  ```
 
 ## Key Features
 
@@ -14,6 +22,7 @@ This Golang boilerplate is designed to kickstart your project development using 
 - ORM and Database Transactions using [Gorm](https://gorm.io/docs/index.html)
 - Tracing via [APM](https://github.com/elastic/apm-agent-go)
 - Logging via [Uber/Zap](https://github.com/uber-go/zap)
+- Mocking via [Mockery](https://vektra.github.io/mockery/latest/installation)
 
 ## Getting Started
 
