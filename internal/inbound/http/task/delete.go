@@ -1,12 +1,18 @@
 package task
 
-import "context"
+import (
+	"base/internal/util"
+	"context"
+)
 
 func (c *Controller) DeleteTasksTaskId(ctx context.Context, request DeleteTasksTaskIdRequestObject) (DeleteTasksTaskIdResponseObject, error) {
-	// err := c.Task.DeleteTask(ctx, request.TaskId)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	span, ctx := util.UpdateCtxSpanController(ctx)
+	defer span.End()
+
+	err := c.Task.DeleteTask(ctx, request.TaskId)
+	if err != nil {
+		return nil, err
+	}
 
 	return nil, nil
 }

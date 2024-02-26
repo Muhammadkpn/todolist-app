@@ -4,7 +4,6 @@ import (
 	"base/internal/inbound/model"
 	"base/internal/util"
 	"context"
-	"time"
 
 	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
 )
@@ -12,7 +11,7 @@ import (
 func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject) (GetTasksResponseObject, error) {
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
-	time.Sleep(1 * time.Second)
+	// time.Sleep(1 * time.Second)
 
 	tasks, err := c.Task.GetAllTasks(ctx)
 	if err != nil {

@@ -1,6 +1,7 @@
 package impl
 
 import (
+	dbModel "base/internal/repository/db/model"
 	"base/internal/usecases/model"
 	"context"
 
@@ -20,11 +21,18 @@ func (u *usecase) CreateTask(ctx context.Context, title string) (task model.Task
 	span, _ := apm.StartSpan(ctx, "usecase", "CreateTask")
 	defer span.End()
 
-	task = model.Task{
+	taskDb := dbModel.Task{
 		Title: title,
 	}
 
-	u.TaskRepository.CreateTask(title)
+	res, err := u.TaskRepository.CreateTask(ctx, taskDb)
+	if err != nil {
+		return
+	}
+
+	task = model.Task{
+		Title: res.Title,
+	}
 
 	return
 
