@@ -1,7 +1,7 @@
 app:
   name: sample-project
   version: 1.0.0
-  base-path: sample-project
+  base-path:
   port: 3031
   gracefull-duration: 10s
 

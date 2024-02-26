@@ -117,7 +117,7 @@ paths:
               Example 1:
                 value:
                   title: task 1
-  "/tasks/:{taskId}":
+  "/tasks/{taskId}":
     parameters:
       - schema:
           type: integer
@@ -225,9 +225,8 @@ components:
       type: object
       x-examples:
         Example 1:
-          message: string
-          timestamp: 0
-          process_time: 0
+          error_code: string
+          error_message: string
       properties:
         error_code:
           type: string
