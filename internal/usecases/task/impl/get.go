@@ -21,6 +21,10 @@ func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err erro
 	span, ctx := util.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
+	// fmt.Println("masuk siniasdnaisd")
+
+	// return
+
 	// time.Sleep(2 * time.Second)
 
 	res, err := u.TaskRepository.GetAllTasks(ctx)
