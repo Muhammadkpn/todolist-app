@@ -13,6 +13,10 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 	defer span.End()
 	// time.Sleep(1 * time.Second)
 
+	// var resq GetTasks200JSONResponse
+
+	// return resq, nil
+
 	tasks, err := c.Task.GetAllTasks(ctx)
 	if err != nil {
 		errCode := "asd"
