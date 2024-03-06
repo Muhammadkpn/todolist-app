@@ -235,5 +235,6 @@ Create separate folders for use cases and repositories as needed to encapsulate 
 - Replace `{{your_module}}` with the actual name of your module directory.
 - Refer to the existing code and comments within the boilerplate for further guidance.
 - Consider including instructions on setting up dependencies and running the application.
+- We define some [Common API Contracts](api-contract.md).
 
 Following these steps and customizing the provided structure, you can quickly create Go applications with well-defined APIs and organized architecture.
