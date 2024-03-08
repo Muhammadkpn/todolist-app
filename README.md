@@ -1,16 +1,16 @@
 # Golang Clean Architecture Boilerplate for Bank Sinarmas
 
-This Golang boilerplate is designed to kickstart your project development using a clean architecture approach. It separates concerns into distinct layers such as handler, usecase, and repository, promoting maintainability and testability.
+This Golang boilerplate is designed to kickstart your project development using a clean architecture approach. It separates concerns into distinct layers, such as handler, use case, and repository, promoting maintainability and testability.
 
 ## Requirements
 
-- [Go](https://golang.org/dl/) (Minimum version: 1.20)
-- [Docker](https://www.docker.com/) (Optional but recommended for database and elk setup)
-- [Mockery](https://vektra.github.io/mockery/latest/installation) for generate mock
+- [Go](https://golang.org/dl/) (Minimum version: 1.20).
+- [Docker](https://www.docker.com/) (Optional but recommended for database and elk setup).
+[Mockery](https://vektra.github.io/mockery/latest/installation) for generating mock.
   ```
   go install github.com/vektra/mockery/v2@v2.41.0
   ```
-- [OAPICodegen](https://github.com/deepmap/oapi-codegen) for generate openAPI contract into controller
+- [OAPICodegen](https://github.com/deepmap/oapi-codegen) for generating controller based on OpenAPI contract.
   ```
   go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest
   ```
@@ -39,13 +39,19 @@ cd template
 go mod download
 ```
 
-3. Build Package
+3. Generate Server Code
 
-```go
+```bash
+./scripts/http.sh
+```
+
+4. Build Package
+
+```bash
 make build-http
 ```
 
-4. Run Package
+5. Run Package
 
 ```bash
 ./bin/http
@@ -113,6 +119,86 @@ The project structure follows the clean architecture principles:
     └── production.yaml
 ```
 
+## Components
+
+The Boilerplate consists of several components. Each has a specific place and purpose.
+
+You can see the interaction among the components in the following diagram
+
+
+```
+                        ┌───────────────────────────────────────────────────────────────────┐                       
+                        │                                                                   │                       
+                        │  ┌─────────────────┐                                              │                       
+                        │  │ Repository Model│                                              │                       
+                        │  └────────┬────────┘      ┌─────────────┐      ┌────────────────┐ │                       
+                        │           │               │UseCase Model│      │Controller Model│ │                       
+                        │           │               └──────┬──────┘      └──────┬─────────┘ │                       
+  ┌────────────────┐    │           │                      │                    │           │                       
+  │                │    │  ┌────────▼────────┐             │                    │           │                       
+  │                ├────┼──►  Repository     ├──┐          │                    │           │     ┌───────────────┐ 
+  │  External      │    │  └─────────────────┘  │    ┌─────▼────┐         ┌─────▼──────┐    │     │               │ 
+  │  Storage       │    │                       ├────► UseCase  ├─────────► Controller ├────┼─────►               │ 
+  │                │    │  ┌─────────────────┐  │    └──────────┘         └────────────┘    │     │               │ 
+  │                ├────┼──►  Repository     ├──┘                                           │     │   User or     │ 
+  │                │    │  └─────────────────┘       ┌──────────┐         ┌────────────┐    │     │   External    │ 
+  └────────────────┘    │                            │ UseCase  ├─────────► Controller ├────┼─────►   System      │ 
+                        │                            └──────────┘         └────────────┘    │     │               │ 
+                        │                                                                   │     │               │ 
+                        └───────────────────────────────────────────────────────────────────┘     └───────────────┘ 
+                                                                                                                    
+```
+
+
+### Repository Model
+
+Location: `internal/repository/<external-dependency>/model/<repository-model>`
+
+Repository Models define the data structures for external storages (e.g., db or redis).
+The Repository Models are usually simple structures similar to a table's columns or Redis's keys/values.
+
+### Repository 
+
+Location: `internal/repository/<external-dependency>/<repository>`
+
+You can use Repositories to deal with Repository Models. Usually, a single Repository is responsible for a specific Repository Model.
+
+A Repository probably contains some common methods to retrieve or save Repository Models (i.e., `Save`, `Get`, etc).
+
+### UseCase Model
+
+Location: `internal/usecase/model/<usecase-model>`
+
+UseCase Models define the data structures for business logic.
+
+### UseCase
+
+Location: `internal/usecase/<usecase>`
+
+You can use UseCase to define business logic. Some examples of business logic are:
+
+- Procurement
+- Settlement
+- Payment
+
+Business Logic usually uses one or more repositories.
+
+### Controller Model
+
+Location: `internal/[inbound|outbound]/<protocol>/model/<controller-model>`
+
+Controller Models define the data structure for inbound/outbound communication. Thus the data structure might contains HTTP header or API payloads.
+
+
+### Controller
+
+Location: `internal/[inbound|outbound]/<protocol>/<controller>`
+
+Controllers define inbound/outbound communication (i.e., REST API, GRPC, etc.)
+
+Controller is a gateway for external system to deal with business logics.
+
+
 ## How to Use
 
 **1. Define your API Contract:**
@@ -149,5 +235,6 @@ Create separate folders for use cases and repositories as needed to encapsulate 
 - Replace `{{your_module}}` with the actual name of your module directory.
 - Refer to the existing code and comments within the boilerplate for further guidance.
 - Consider including instructions on setting up dependencies and running the application.
+- We define some [Common API Contracts](api-contract.md).
 
-By following these steps and customizing the provided structure, you can quickly create Go applications with well-defined APIs and organized architecture.
+Following these steps and customizing the provided structure, you can quickly create Go applications with well-defined APIs and organized architecture.
