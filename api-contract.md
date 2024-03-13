@@ -32,12 +32,19 @@
   - Refresh Token has longer expiration than Access Token
   - When Frontend get 401 unauthorized from the backend, it will send refresh-token request, and Backend will send the new tokens (refresh and access)
 
+# SQL Convention
+
+- For primary key please use
+  - `id`: If your priority is basic functionality, such as sorting and readability, using an auto-incrementing integer ID (id) is a straightforward and commonly used approach. It provides an efficient way to uniquely identify records and facilitates sorting operations.
+  - `uuid4`: For enhanced security against spoofing attacks and ensuring globally unique identifiers, consider using Universally Unique Identifiers (UUIDs) generated using version 4 (uuid4). While UUIDs offer excellent security, it's important to note that they cannot be easily sorted due to their random nature. However, they are highly recommended for scenarios where security is paramount.
+  - `ulid`: If you need a compromise between the security of UUIDs and the ability to sort records, consider using Universally Unique Lexicographically Sortable Identifiers (ULIDs). ULIDs combine the uniqueness of UUIDs with the ability to be sorted lexicographically. This makes them suitable for scenarios where both security and sorting capabilities are important.
+
 # Common Response
 
 Common response contains of the following fields:
 
 - `status` (required, string): Error code, or `SUCCESS`.
-- `errorMessage` (optional, string): User readable error message.
+- `error_message` (optional, string): User readable error message.
 - `data` (required, any):
   - For `getting list of entities`, this should return a list.
   - For `getting a single entity`, `update`, or `delete`, this should return an object.
@@ -81,7 +88,7 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": [
     {} // object
   ]
@@ -107,7 +114,7 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": {} // object
 }
 ```
@@ -135,7 +142,7 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": {
     "id": "<new-id>",
     "<field>": "value"
@@ -166,7 +173,7 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": {
     "id": "<existing-id>",
     "<field>": "value"
@@ -199,7 +206,7 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": {
     "id": "<existing-id>",
     "<field>": "value"
@@ -224,7 +231,7 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": {
     "id": "<existing-id>",
     "<field>": "value"
@@ -250,10 +257,10 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_meessage": "",
   "data": {
     "token": "",
-    "refreshToken": ""
+    "refresh_token": ""
   }
 }
 ```
@@ -270,7 +277,7 @@ Request
 
 ```json
 {
-  "refreshToken": ""
+  "refresh_token": ""
 }
 ```
 
@@ -279,10 +286,10 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": {
     "token": "",
-    "refreshToken": ""
+    "refresh_token": ""
   }
 }
 ```
@@ -303,7 +310,7 @@ Request
 
 ```json
 {
-  "refreshToken": "",
+  "refresh_token": "",
   "permissions": ["permission-1", "permission-2"]
 }
 ```
@@ -313,7 +320,7 @@ Response
 ```json
 {
   "status": "INVALID_SOMETHING",
-  "errorMessage": "",
+  "error_message": "",
   "data": {
     "<permission-1>": true,
     "<permission-2>": false
@@ -390,70 +397,77 @@ Data:
 ## SQL Snytax
 
 ```sql
-CREATE TABLE IF NOT EXISTS employee(
+CREATE TABLE IF NOT EXISTS user(
     id SERIAL PRIMARY KEY,
     nik VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     status INT2 DEFAULT 1,
-    create_by INT4 NOT NULL,
-    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_by INT4 NOT NULL,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INT4 NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by INT4 NOT NULL,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS role(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     status INT2 DEFAULT 1,
-    create_by INT4 NOT NULL,
-    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_by INT4 NOT NULL,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INT4 NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by INT4 NOT NULL,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS employee_role(
+CREATE TABLE IF NOT EXISTS permission(
     id SERIAL PRIMARY KEY,
-    employee_id SERIAL NOT NULL,
-    role_id SERIAL NOT NULL,
+    name VARCHAR(255) NOT NULL,
     status INT2 DEFAULT 1,
-    create_by INT4 NOT NULL,
-    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_by INT4 NOT NULL,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INT4 NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by INT4 NOT NULL,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS role_access(
+CREATE TABLE IF NOT EXISTS user_role(
     id SERIAL PRIMARY KEY,
+    user_id SERIAL NOT NULL,
     role_id SERIAL NOT NULL,
-    access_name VARCHAR(255) NOT NULL,
     status INT2 DEFAULT 1,
-    create_by INT4 NOT NULL,
-    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_by INT4 NOT NULL,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INT4 NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by INT4 NOT NULL,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS employee_role_log(
+CREATE TABLE IF NOT EXISTS role_permission(
     id SERIAL PRIMARY KEY,
-    employee_id SERIAL NOT NULL,
     role_id SERIAL NOT NULL,
+    permission_id SERIAL NOT NULL,
     status INT2 DEFAULT 1,
-    create_by INT4 NOT NULL,
-    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_by INT4 NOT NULL,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INT4 NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by INT4 NOT NULL,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS role_access_log(
+CREATE TABLE IF NOT EXISTS access_log(
     id SERIAL PRIMARY KEY,
-    role_id SERIAL NOT NULL,
-    access_name VARCHAR(255) NOT NULL,
+    log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usecase VARCHAR(255) NOT NULL,
+    old_user_id SERIAL,
+    old_role_id SERIAL,
+    old_permission_id SERIAL,
+    new_user_id SERIAL,
+    new_role_id SERIAL,
+    new_permission_id SERIAL,
     status INT2 DEFAULT 1,
-    create_by INT4 NOT NULL,
-    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_by INT4 NOT NULL,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INT4 NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by INT4 NOT NULL,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS
 ```
 
 ## Standarization for role access
@@ -469,7 +483,7 @@ access role to create user in the user list page: USER_LIST+CREATE_USER
 
 ## Example
 
-### employee
+### user
 
 id = 1
 nik = 123
@@ -479,7 +493,7 @@ id = 2
 nik = 234
 name = B
 
-## role
+### role
 
 id = 10
 name = IT Maker
@@ -487,38 +501,52 @@ name = IT Maker
 id = 11
 name = IT Checker
 
-### role_access
+### permission
 
 id = 20
-role_id = 10
-access_name = USER_LIST
+name = USER_LIST
 
 id = 21
-role_id = 10
-access_name = USER_LIST+CREATE
+name = USER_LIST+CREATE
 
 id = 22
-role_id = 11
-access_name = USER_LIST
+name = USER_LIST+APPROVE
 
 id = 23
-role_id = 11
-access_name = USER_LIST+APPROVE
+name = USER_LIST+DELETE
 
-id = 24
-role_id = 11
-access_name = USER_LIST+DELETE
-
-### employee_role
+### role_permission
 
 id = 30
-employee_id = 1
 role_id = 10
+permission_id = 20
 
 id = 31
-employee_id = 2
+role_id = 10
+permission_id = 21
+
+id = 32
+role_id = 11
+permission_id = 20
+
+id = 33
+role_id = 11
+permission_id = 22
+
+id = 34
+role_id = 11
+permission_id = 23
+
+### user_role
+
+id = 40
+user_id = 1
+role_id = 10
+
+id = 41
+user_id = 2
 role_id = 11
 
 ---
 
-Based on this example we have 2 employee A and B, A's role is IT Maker that can view user list page and also can create user meanwhile B's role is IT Checker than can view user list page, approve user, delete user
+Based on this example we have 2 user A and B, A's role is IT Maker that can view user list page and also can create user meanwhile B's role is IT Checker than can view user list page, approve user, delete user
