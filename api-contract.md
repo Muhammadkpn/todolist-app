@@ -450,7 +450,7 @@ CREATE TABLE IF NOT EXISTS role_permission(
     updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS access_log(
+CREATE TABLE IF NOT EXISTS user_role_permission_log(
     id SERIAL PRIMARY KEY,
     log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     usecase VARCHAR(255) NOT NULL,
@@ -466,8 +466,6 @@ CREATE TABLE IF NOT EXISTS access_log(
     updated_by INT4 NOT NULL,
     updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE TABLE IF NOT EXISTS
 ```
 
 ## Standarization for role access
