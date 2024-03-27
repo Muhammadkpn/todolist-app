@@ -4,43 +4,36 @@ import (
 	"base/internal/inbound/model"
 	"base/internal/util"
 	"context"
-
-	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
 )
 
 func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject) (GetTasksResponseObject, error) {
+	// Update context and start span
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
-	// time.Sleep(1 * time.Second)
 
-	// var resq GetTasks200JSONResponse
-
-	// return resq, nil
-
+	// Get all tasks
 	tasks, err := c.Task.GetAllTasks(ctx)
 	if err != nil {
-		errCode := "asd"
-		errMsg := err.Error()
-
+		// If there's an error, return 500 response
 		return GetTasks500JSONResponse{
-			ErrorCode:    &errCode,
-			ErrorMessage: &errMsg,
+			ErrorCode:    util.StringPointer(""),
+			ErrorMessage: util.StringPointer(err.Error()),
 		}, nil
 	}
 
-	var res GetTasks200JSONResponse
-
+	// Prepare response
+	var responseData []model.Task
 	for _, task := range tasks {
-		*res.Data = append(*res.Data, model.Task{
+		responseData = append(responseData, model.Task{
 			Id:     &task.ID,
 			Status: &task.Status,
 			Title:  &task.Title,
 		})
 	}
 
-	sdklog.Debug(ctx, "gogogogo")
-
-	return res, nil
+	return GetTasks200JSONResponse{
+		Data: &responseData,
+	}, nil
 }
 
 func (c *Controller) GetTasksTaskId(ctx context.Context, request GetTasksTaskIdRequestObject) (GetTasksTaskIdResponseObject, error) {

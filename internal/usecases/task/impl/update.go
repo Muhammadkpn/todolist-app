@@ -2,23 +2,15 @@ package impl
 
 import (
 	"base/internal/usecases/model"
+	"base/internal/util"
 	"context"
-
-	"go.elastic.co/apm"
 )
 
-// import (
-// 	"base/internal/model"
-// 	"context"
-
-// 	"go.elastic.co/apm"
-// )
-
 func (u *usecase) UpdateTask(ctx context.Context, id int64, title string) (task model.Task, err error) {
-	span, _ := apm.StartSpan(ctx, "usecase", "UpdateTask")
+	span, ctx := util.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
-	_, err = u.TaskRepository.UpdateTask(id, title)
+	_, err = u.TaskRepository.UpdateTask(ctx, id, title)
 	if err != nil {
 		return model.Task{}, err
 	}

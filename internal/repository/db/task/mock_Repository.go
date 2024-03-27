@@ -14,9 +14,9 @@ type MockRepository struct {
 	mock.Mock
 }
 
-// CreateTask provides a mock function with given fields: title
-func (_m *MockRepository) CreateTask(title string) (model.Task, error) {
-	ret := _m.Called(title)
+// CreateTask provides a mock function with given fields: ctx, request
+func (_m *MockRepository) CreateTask(ctx context.Context, request model.Task) (model.Task, error) {
+	ret := _m.Called(ctx, request)
 
 	if len(ret) == 0 {
 		panic("no return value specified for CreateTask")
@@ -24,17 +24,17 @@ func (_m *MockRepository) CreateTask(title string) (model.Task, error) {
 
 	var r0 model.Task
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string) (model.Task, error)); ok {
-		return rf(title)
+	if rf, ok := ret.Get(0).(func(context.Context, model.Task) (model.Task, error)); ok {
+		return rf(ctx, request)
 	}
-	if rf, ok := ret.Get(0).(func(string) model.Task); ok {
-		r0 = rf(title)
+	if rf, ok := ret.Get(0).(func(context.Context, model.Task) model.Task); ok {
+		r0 = rf(ctx, request)
 	} else {
 		r0 = ret.Get(0).(model.Task)
 	}
 
-	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(title)
+	if rf, ok := ret.Get(1).(func(context.Context, model.Task) error); ok {
+		r1 = rf(ctx, request)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -42,17 +42,17 @@ func (_m *MockRepository) CreateTask(title string) (model.Task, error) {
 	return r0, r1
 }
 
-// DeleteTask provides a mock function with given fields: id
-func (_m *MockRepository) DeleteTask(id int) error {
-	ret := _m.Called(id)
+// DeleteTask provides a mock function with given fields: ctx, id
+func (_m *MockRepository) DeleteTask(ctx context.Context, id int64) error {
+	ret := _m.Called(ctx, id)
 
 	if len(ret) == 0 {
 		panic("no return value specified for DeleteTask")
 	}
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(int) error); ok {
-		r0 = rf(id)
+	if rf, ok := ret.Get(0).(func(context.Context, int64) error); ok {
+		r0 = rf(ctx, id)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -90,9 +90,9 @@ func (_m *MockRepository) GetAllTasks(ctx context.Context) ([]model.Task, error)
 	return r0, r1
 }
 
-// GetTaskByID provides a mock function with given fields: id
-func (_m *MockRepository) GetTaskByID(id int) (model.Task, error) {
-	ret := _m.Called(id)
+// GetTaskByID provides a mock function with given fields: ctx, id
+func (_m *MockRepository) GetTaskByID(ctx context.Context, id int64) (model.Task, error) {
+	ret := _m.Called(ctx, id)
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetTaskByID")
@@ -100,17 +100,17 @@ func (_m *MockRepository) GetTaskByID(id int) (model.Task, error) {
 
 	var r0 model.Task
 	var r1 error
-	if rf, ok := ret.Get(0).(func(int) (model.Task, error)); ok {
-		return rf(id)
+	if rf, ok := ret.Get(0).(func(context.Context, int64) (model.Task, error)); ok {
+		return rf(ctx, id)
 	}
-	if rf, ok := ret.Get(0).(func(int) model.Task); ok {
-		r0 = rf(id)
+	if rf, ok := ret.Get(0).(func(context.Context, int64) model.Task); ok {
+		r0 = rf(ctx, id)
 	} else {
 		r0 = ret.Get(0).(model.Task)
 	}
 
-	if rf, ok := ret.Get(1).(func(int) error); ok {
-		r1 = rf(id)
+	if rf, ok := ret.Get(1).(func(context.Context, int64) error); ok {
+		r1 = rf(ctx, id)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -118,9 +118,9 @@ func (_m *MockRepository) GetTaskByID(id int) (model.Task, error) {
 	return r0, r1
 }
 
-// UpdateTask provides a mock function with given fields: id, title
-func (_m *MockRepository) UpdateTask(id int, title string) (model.Task, error) {
-	ret := _m.Called(id, title)
+// UpdateTask provides a mock function with given fields: ctx, id, title
+func (_m *MockRepository) UpdateTask(ctx context.Context, id int64, title string) (model.Task, error) {
+	ret := _m.Called(ctx, id, title)
 
 	if len(ret) == 0 {
 		panic("no return value specified for UpdateTask")
@@ -128,17 +128,17 @@ func (_m *MockRepository) UpdateTask(id int, title string) (model.Task, error) {
 
 	var r0 model.Task
 	var r1 error
-	if rf, ok := ret.Get(0).(func(int, string) (model.Task, error)); ok {
-		return rf(id, title)
+	if rf, ok := ret.Get(0).(func(context.Context, int64, string) (model.Task, error)); ok {
+		return rf(ctx, id, title)
 	}
-	if rf, ok := ret.Get(0).(func(int, string) model.Task); ok {
-		r0 = rf(id, title)
+	if rf, ok := ret.Get(0).(func(context.Context, int64, string) model.Task); ok {
+		r0 = rf(ctx, id, title)
 	} else {
 		r0 = ret.Get(0).(model.Task)
 	}
 
-	if rf, ok := ret.Get(1).(func(int, string) error); ok {
-		r1 = rf(id, title)
+	if rf, ok := ret.Get(1).(func(context.Context, int64, string) error); ok {
+		r1 = rf(ctx, id, title)
 	} else {
 		r1 = ret.Error(1)
 	}
