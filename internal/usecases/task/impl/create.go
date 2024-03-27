@@ -3,9 +3,8 @@ package impl
 import (
 	dbModel "base/internal/repository/db/model"
 	"base/internal/usecases/model"
+	"base/internal/util"
 	"context"
-
-	"go.elastic.co/apm"
 )
 
 // import (
@@ -17,8 +16,7 @@ import (
 // )
 
 func (u *usecase) CreateTask(ctx context.Context, title string) (task model.Task, err error) {
-	// task, err = u.TaskRepository.CreateTask(title)
-	span, _ := apm.StartSpan(ctx, "usecase", "CreateTask")
+	span, ctx := util.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
 	taskDb := dbModel.Task{
@@ -33,26 +31,6 @@ func (u *usecase) CreateTask(ctx context.Context, title string) (task model.Task
 	task = model.Task{
 		Title: res.Title,
 	}
-
-	return
-
-	// err = u.TaskGenericRepository.GetDb().Transaction(func(tx *gorm.DB) error {
-	// 	errTx := u.TaskGenericRepository.Create(context.Background(), task, tx) // Pass tx to Insert
-	// 	if errTx != nil {
-	// 		return errTx
-	// 	}
-
-	// 	task.Title = "qq"
-	// 	errTx = u.TaskGenericRepository.Create(context.Background(), task, tx) // Pass tx to Insert
-	// 	if err != nil {
-	// 		//
-	// 		return err
-	// 	}
-
-	// 	return errTx // nil = commmit, err = rollback
-	// })
-
-	// u.TaskGenericRepository.Create(context.Background(), task, nil)
 
 	return
 }
