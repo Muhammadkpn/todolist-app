@@ -11,6 +11,7 @@ require (
 	go.elastic.co/apm v1.15.0
 	go.elastic.co/apm/module/apmgormv2 v1.15.0
 	go.uber.org/dig v1.17.1
+	gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0
 	gopkg.in/yaml.v3 v3.0.1
 	gorm.io/gorm v1.25.6
 )
