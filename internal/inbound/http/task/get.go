@@ -12,7 +12,7 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 	defer span.End()
 
 	// Get all tasks
-	tasks, err := c.Task.GetAllTasks(ctx)
+	tasks, err := c.TaskUsecase.GetAllTasks(ctx)
 	if err != nil {
 		// If there's an error, return 500 response
 		return GetTasks500JSONResponse{
@@ -40,7 +40,7 @@ func (c *Controller) GetTasksTaskId(ctx context.Context, request GetTasksTaskIdR
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
 
-	task, err := c.Task.GetTaskByID(ctx, request.TaskId)
+	task, err := c.TaskUsecase.GetTaskByID(ctx, request.TaskId)
 	if err != nil {
 		errCode := ""
 		errMsg := err.Error()

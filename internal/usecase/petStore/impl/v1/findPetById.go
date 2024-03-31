@@ -1,15 +1,15 @@
-package petStoreV2
+package petStoreV1
 
 import (
-	"base/internal/usecases/model"
+	"base/internal/usecase/model"
 	"base/pkg/enums/petType"
 	"context"
 )
 
 func (*usecase) FindPetByID(ctx context.Context, id uint64) (model.Pet, error) {
 	return model.Pet{
-		ID:   2,
-		Name: "Lily",
-		Type: petType.Cat,
+		ID:   1,
+		Name: "Max",
+		Type: petType.Dog,
 	}, nil
 }

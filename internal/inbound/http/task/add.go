@@ -9,7 +9,7 @@ func (c *Controller) PostTasks(ctx context.Context, request PostTasksRequestObje
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
 
-	_, err := c.Task.CreateTask(ctx, *request.Body.Title)
+	_, err := c.TaskUsecase.CreateTask(ctx, *request.Body.Title)
 	if err != nil {
 		return nil, err
 	}

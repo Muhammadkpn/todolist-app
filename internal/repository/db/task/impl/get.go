@@ -26,7 +26,12 @@ func (r *repository) GetTaskByID(ctx context.Context, id int64) (task model.Task
 	defer span.End()
 
 	db := r.DbGorm.WithContext(ctx)
-	err = db.Table("task").Where("id = ?", id).First(&task).Error
+	result := db.Table("task").Where("id = ?", id).First(&task)
+	if result.Error != nil {
+		err = result.Error
+
+		return
+	}
 
 	return
 }

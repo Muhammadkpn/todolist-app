@@ -2,8 +2,8 @@ package task
 
 import (
 	modelInbound "base/internal/inbound/model"
-	modelUsecase "base/internal/usecases/model"
-	"base/internal/usecases/task"
+	modelUsecase "base/internal/usecase/model"
+	"base/internal/usecase/task"
 	"context"
 	"errors"
 	"reflect"
@@ -76,7 +76,7 @@ func TestController_GetTasks(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.mock()
 			c := &Controller{
-				Task: mockTaskUsecase,
+				TaskUsecase: mockTaskUsecase,
 			}
 			got, err := c.GetTasks(tt.args.ctx, tt.args.request)
 			if (err != nil) != tt.wantErr {

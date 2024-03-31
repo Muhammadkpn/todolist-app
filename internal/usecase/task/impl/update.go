@@ -1,7 +1,7 @@
 package impl
 
 import (
-	"base/internal/usecases/model"
+	"base/internal/usecase/model"
 	"base/internal/util"
 	"context"
 )

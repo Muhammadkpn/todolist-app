@@ -7,7 +7,6 @@ import (
 	"reflect"
 	"testing"
 
-	// postgres "go.elastic.co/apm/module/apmgormv2/driver/postgres"
 	"gopkg.in/DATA-DOG/go-sqlmock.v1"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -15,7 +14,7 @@ import (
 
 func Test_repository_GetAllTasks(t *testing.T) {
 	db, mock, _ := sqlmock.New()
-	// defer db.Close()
+	defer db.Close()
 
 	gormDB, _ := gorm.Open(postgres.New(postgres.Config{
 		Conn: db,

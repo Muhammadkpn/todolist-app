@@ -1,7 +1,7 @@
 package petStore
 
 import (
-	usecase "base/internal/usecases"
+	usecase "base/internal/usecase"
 
 	"go.uber.org/dig"
 )

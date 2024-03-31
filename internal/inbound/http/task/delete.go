@@ -9,7 +9,7 @@ func (c *Controller) DeleteTasksTaskId(ctx context.Context, request DeleteTasksT
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
 
-	err := c.Task.DeleteTask(ctx, request.TaskId)
+	err := c.TaskUsecase.DeleteTask(ctx, request.TaskId)
 	if err != nil {
 		return nil, err
 	}
