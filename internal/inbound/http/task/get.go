@@ -12,12 +12,12 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 	defer span.End()
 
 	// Get all tasks
-	tasks, err := c.Task.GetAllTasks(ctx)
+	tasks, err := c.TaskUsecase.GetAllTasks(ctx)
 	if err != nil {
 		// If there's an error, return 500 response
 		return GetTasks500JSONResponse{
-			ErrorCode:    util.StringPointer(""),
-			ErrorMessage: util.StringPointer(err.Error()),
+			ErrorCode:    "",
+			ErrorMessage: err.Error(),
 		}, nil
 	}
 
@@ -25,9 +25,9 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 	var responseData []model.Task
 	for _, task := range tasks {
 		responseData = append(responseData, model.Task{
-			Id:     &task.ID,
-			Status: &task.Status,
-			Title:  &task.Title,
+			Id:     task.ID,
+			Status: task.Status,
+			Title:  task.Title,
 		})
 	}
 
@@ -40,22 +40,19 @@ func (c *Controller) GetTasksTaskId(ctx context.Context, request GetTasksTaskIdR
 	span, ctx := util.UpdateCtxSpanController(ctx)
 	defer span.End()
 
-	task, err := c.Task.GetTaskByID(ctx, request.TaskId)
+	task, err := c.TaskUsecase.GetTaskByID(ctx, request.TaskId)
 	if err != nil {
-		errCode := ""
-		errMsg := err.Error()
-
 		return GetTasksTaskId500JSONResponse{
-			ErrorCode:    &errCode,
-			ErrorMessage: &errMsg,
+			ErrorCode:    "",
+			ErrorMessage: err.Error(),
 		}, nil
 	}
 
 	res := GetTasksTaskId200JSONResponse{
 		Data: &model.Task{
-			Id:     &task.ID,
-			Title:  &task.Title,
-			Status: &task.Status,
+			Id:     task.ID,
+			Title:  task.Title,
+			Status: task.Status,
 		},
 	}
 

@@ -3,7 +3,7 @@ package impl
 import (
 	modelDB "base/internal/repository/db/model"
 	"base/internal/repository/db/task"
-	"base/internal/usecases/model"
+	"base/internal/usecase/model"
 	"context"
 	"errors"
 	"reflect"

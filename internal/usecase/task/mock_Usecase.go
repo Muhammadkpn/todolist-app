@@ -3,7 +3,7 @@
 package task
 
 import (
-	model "base/internal/usecases/model"
+	model "base/internal/usecase/model"
 	context "context"
 
 	mock "github.com/stretchr/testify/mock"

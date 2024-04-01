@@ -1,7 +1,7 @@
 package task
 
 import (
-	"base/internal/usecases/model"
+	"base/internal/usecase/model"
 	"context"
 )
 

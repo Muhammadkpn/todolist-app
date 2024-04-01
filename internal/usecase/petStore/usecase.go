@@ -1,7 +1,7 @@
 package petStore
 
 import (
-	"base/internal/usecases/model"
+	"base/internal/usecase/model"
 	"context"
 )
 

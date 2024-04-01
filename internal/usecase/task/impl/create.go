@@ -2,7 +2,7 @@ package impl
 
 import (
 	dbModel "base/internal/repository/db/model"
-	"base/internal/usecases/model"
+	"base/internal/usecase/model"
 	"base/internal/util"
 	"context"
 )

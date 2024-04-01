@@ -2,8 +2,8 @@ package task
 
 import (
 	modelInbound "base/internal/inbound/model"
-	modelUsecase "base/internal/usecases/model"
-	"base/internal/usecases/task"
+	modelUsecase "base/internal/usecase/model"
+	"base/internal/usecase/task"
 	"context"
 	"errors"
 	"reflect"
@@ -14,16 +14,11 @@ import (
 
 func TestController_GetTasks(t *testing.T) {
 	mockTaskUsecase := task.NewMockUsecase(t)
-	tempID := int64(1)
-	tempTitle := "aaa"
-	tempStatus := 1
-	tempErrorCode := ""
-	tempErrorMsg := "err"
 	tempTask := []modelInbound.Task{
 		{
-			Id:     &tempID,
-			Title:  &tempTitle,
-			Status: &tempStatus,
+			Id:     1,
+			Title:  "aaa",
+			Status: 1,
 		},
 	}
 
@@ -66,8 +61,8 @@ func TestController_GetTasks(t *testing.T) {
 				mockTaskUsecase.On("GetAllTasks", mock.Anything).Return([]modelUsecase.Task{}, errors.New("err")).Once()
 			},
 			want: GetTasks500JSONResponse{
-				ErrorCode:    &tempErrorCode,
-				ErrorMessage: &tempErrorMsg,
+				ErrorCode:    "",
+				ErrorMessage: "err",
 			},
 			wantErr: false,
 		},
@@ -76,7 +71,7 @@ func TestController_GetTasks(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.mock()
 			c := &Controller{
-				Task: mockTaskUsecase,
+				TaskUsecase: mockTaskUsecase,
 			}
 			got, err := c.GetTasks(tt.args.ctx, tt.args.request)
 			if (err != nil) != tt.wantErr {
