@@ -14,16 +14,11 @@ import (
 
 func TestController_GetTasks(t *testing.T) {
 	mockTaskUsecase := task.NewMockUsecase(t)
-	tempID := int64(1)
-	tempTitle := "aaa"
-	tempStatus := 1
-	tempErrorCode := ""
-	tempErrorMsg := "err"
 	tempTask := []modelInbound.Task{
 		{
-			Id:     &tempID,
-			Title:  &tempTitle,
-			Status: &tempStatus,
+			Id:     1,
+			Title:  "aaa",
+			Status: 1,
 		},
 	}
 
@@ -66,8 +61,8 @@ func TestController_GetTasks(t *testing.T) {
 				mockTaskUsecase.On("GetAllTasks", mock.Anything).Return([]modelUsecase.Task{}, errors.New("err")).Once()
 			},
 			want: GetTasks500JSONResponse{
-				ErrorCode:    &tempErrorCode,
-				ErrorMessage: &tempErrorMsg,
+				ErrorCode:    "",
+				ErrorMessage: "err",
 			},
 			wantErr: false,
 		},
