@@ -2,14 +2,14 @@ package task
 
 import (
 	"base/internal/inbound/model"
-	"base/internal/util"
+	pkgHelper "base/pkg/helper"
 	"context"
 
 	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
 )
 
 func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject) (GetTasksResponseObject, error) {
-	span, ctx := util.UpdateCtxSpanController(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanController(ctx)
 	defer span.End()
 	// time.Sleep(1 * time.Second)
 
@@ -19,13 +19,11 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 
 	tasks, err := c.Task.GetAllTasks(ctx)
 	if err != nil {
-		errCode := "asd"
-		errMsg := err.Error()
-
-		return GetTasks500JSONResponse{
-			ErrorCode:    &errCode,
-			ErrorMessage: &errMsg,
-		}, nil
+		statusCode := pkgHelper.FromErrorMap(err, model.ErrorMap)
+		switch statusCode {
+		default:
+			return GetTasks500JSONResponse{Message: err.Error()}, nil
+		}
 	}
 
 	var res GetTasks200JSONResponse
@@ -44,18 +42,16 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 }
 
 func (c *Controller) GetTasksTaskId(ctx context.Context, request GetTasksTaskIdRequestObject) (GetTasksTaskIdResponseObject, error) {
-	span, ctx := util.UpdateCtxSpanController(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanController(ctx)
 	defer span.End()
 
 	task, err := c.Task.GetTaskByID(ctx, request.TaskId)
 	if err != nil {
-		errCode := ""
-		errMsg := err.Error()
-
-		return GetTasksTaskId500JSONResponse{
-			ErrorCode:    &errCode,
-			ErrorMessage: &errMsg,
-		}, nil
+		statusCode := pkgHelper.FromErrorMap(err, model.ErrorMap)
+		switch statusCode {
+		default:
+			return GetTasksTaskId500JSONResponse{Message: err.Error()}, nil
+		}
 	}
 
 	res := GetTasksTaskId200JSONResponse{

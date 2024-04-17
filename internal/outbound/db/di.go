@@ -1,8 +1,8 @@
 package db
 
 import (
-	taskRepo "base/internal/repository/db/task"
-	taskRepoImpl "base/internal/repository/db/task/impl"
+	taskRepo "base/internal/outbound/db/task"
+	taskRepoImpl "base/internal/outbound/db/task/impl"
 
 	"go.uber.org/dig"
 )
@@ -14,9 +14,7 @@ type Repository struct {
 }
 
 func Register(container *dig.Container) error {
-	var err error
-
-	err = container.Provide(taskRepoImpl.New)
+	err := container.Provide(taskRepoImpl.New)
 	if err != nil {
 		return err
 	}

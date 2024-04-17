@@ -2,7 +2,7 @@ package impl
 
 import (
 	"base/internal/usecases/model"
-	"base/internal/util"
+	pkgHelper "base/pkg/helper"
 	"context"
 
 	"go.elastic.co/apm"
@@ -18,7 +18,7 @@ import (
 // )
 
 func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanUsecase(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
 	// fmt.Println("masuk siniasdnaisd")

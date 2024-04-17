@@ -1,7 +1,7 @@
 package impl
 
 import (
-	dbModel "base/internal/repository/db/model"
+	obModel "base/internal/outbound/db/model"
 	"base/internal/usecases/model"
 	"context"
 
@@ -21,7 +21,7 @@ func (u *usecase) CreateTask(ctx context.Context, title string) (task model.Task
 	span, _ := apm.StartSpan(ctx, "usecase", "CreateTask")
 	defer span.End()
 
-	taskDb := dbModel.Task{
+	taskDb := obModel.Task{
 		Title: title,
 	}
 

@@ -1,7 +1,7 @@
 package impl
 
 import (
-	taskRepository "base/internal/repository/db/task"
+	taskRepository "base/internal/outbound/db/task"
 	pkgConfig "base/pkg/config"
 
 	"gorm.io/gorm"

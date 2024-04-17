@@ -1,7 +1,7 @@
 package task
 
 import (
-	"base/internal/repository/db/model"
+	"base/internal/outbound/db/model"
 	"context"
 )
 

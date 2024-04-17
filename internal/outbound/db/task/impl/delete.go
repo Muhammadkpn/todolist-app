@@ -1,14 +1,14 @@
 package impl
 
 import (
-	"base/internal/repository/db/model"
-	"base/internal/util"
+	"base/internal/outbound/db/model"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (r *repository) DeleteTask(ctx context.Context, id int64) (err error) {
 	// _, err = r.Db.ExecContext(context.Background(), constant.DeleteTaskQuery, id)
-	span, ctx := util.UpdateCtxSpanRepository(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
 	task := model.Task{

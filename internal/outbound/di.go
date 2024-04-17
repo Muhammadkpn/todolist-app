@@ -1,7 +1,7 @@
-package repository
+package outbound
 
 import (
-	dbRepo "base/internal/repository/db"
+	dbRepo "base/internal/outbound/db"
 
 	"go.uber.org/dig"
 )

@@ -1,13 +1,13 @@
 package impl
 
 import (
-	"base/internal/repository/db/model"
-	"base/internal/util"
+	"base/internal/outbound/db/model"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (r *repository) GetAllTasks(ctx context.Context) (tasks []model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanRepository(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
 	// time.Sleep(1 * time.Second)

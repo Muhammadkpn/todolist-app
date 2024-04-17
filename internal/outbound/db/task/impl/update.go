@@ -1,7 +1,7 @@
 package impl
 
 import (
-	"base/internal/repository/db/model"
+	"base/internal/outbound/db/model"
 )
 
 func (r *repository) UpdateTask(id int64, title string) (task model.Task, err error) {
