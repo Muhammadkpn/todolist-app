@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"base/internal/outbound"
-	usecase "base/internal/usecases"
+	usecase "base/internal/usecase"
 	pkgConfig "base/pkg/config"
 	pkgResource "base/pkg/resource"
 

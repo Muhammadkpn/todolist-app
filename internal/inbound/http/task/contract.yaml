@@ -128,15 +128,11 @@ paths:
               examples:
                 Example 1:
                   value:
-                    message: success
-                    timestamp: 1707190114
-                    process_time: 130
+                    error_code: string
+                    error_message: string
                     data:
-                      - id: 1
-                        title: write timesheet
-                        status: 1
-                      - id: 2
-                        title: daily standup
+                      - id: 0
+                        title: string
                         status: 0
         '500':
           description: Internal Server Error
@@ -147,10 +143,12 @@ paths:
               examples:
                 Example 1:
                   value:
-                    response_header:
-                      success: false
-                      message: error getting tasks
-                      process_time: 0
+                    error_code: "500"
+                    error_message: error getting task
+                Example 2:
+                  value:
+                    error_code: string
+                    error_message: string
       operationId: get-tasks
       x-stoplight:
         id: jc08h943txlln
@@ -183,9 +181,8 @@ paths:
               examples:
                 Example 1:
                   value:
-                    message: error
-                    timestamp: 1707190114
-                    process_time: 210
+                    error_code: string
+                    error_message: string
       x-stoplight:
         id: kho6ygmj03lrq
       description: Add Task
@@ -214,6 +211,10 @@ components:
         id: semgxfb01vwc6
       type: object
       description: Model for task
+      required:
+        - id
+        - title
+        - status
       properties:
         id:
           type: integer

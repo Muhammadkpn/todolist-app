@@ -1,6 +1,8 @@
-package petStoreV2
+package petStoreV1
 
-import "base/internal/usecases/petStore"
+import (
+	"base/internal/usecase/petStore"
+)
 
 type (
 	usecase struct{}

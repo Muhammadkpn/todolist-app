@@ -1,6 +1,6 @@
 package sharedV1
 
-import "base/internal/usecases/shared"
+import "base/internal/usecase/shared"
 
 type (
 	usecase struct {

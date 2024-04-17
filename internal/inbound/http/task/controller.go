@@ -1,14 +1,14 @@
 package task
 
 import (
-	taskUsecase "base/internal/usecases/task"
+	taskUsecase "base/internal/usecase/task"
 
 	"go.uber.org/dig"
 )
 
 type Controller struct {
 	dig.In
-	Task taskUsecase.Usecase
+	TaskUsecase taskUsecase.Usecase
 }
 
 var _ StrictServerInterface = (*Controller)(nil)

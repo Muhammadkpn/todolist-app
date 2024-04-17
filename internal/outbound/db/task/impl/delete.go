@@ -16,7 +16,12 @@ func (r *repository) DeleteTask(ctx context.Context, id int64) (err error) {
 	}
 
 	db := r.DbGorm.WithContext(ctx)
-	db.Model(task).Update("status", 0)
+	result := db.Model(task).Update("status", 0)
+	if result.Error != nil {
+		err = result.Error
+
+		return
+	}
 
 	return
 }

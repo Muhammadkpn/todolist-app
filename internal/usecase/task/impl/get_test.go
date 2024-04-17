@@ -1,16 +1,5 @@
 package impl
 
-// import (
-// 	"base/internal/model"
-// 	"base/internal/repository/db/task"
-// 	"context"
-// 	"errors"
-// 	"reflect"
-// 	"testing"
-
-// 	"github.com/stretchr/testify/mock"
-// )
-
 // func Test_usecase_GetAllTasks(t *testing.T) {
 // 	mockdb := task.NewMockRepository(t)
 
@@ -28,7 +17,7 @@ package impl
 // 		{
 // 			name: "test success",
 // 			mock: func() {
-// 				mockdb.On("GetAllTasks", mock.Anything).Return([]model.Task{
+// 				mockdb.On("GetAllTasks", mock.Anything).Return([]modelDB.Task{
 // 					{
 // 						ID:     1,
 // 						Title:  "test",
@@ -50,9 +39,8 @@ package impl
 // 		{
 // 			name: "test fail",
 // 			mock: func() {
-// 				mockdb.On("GetAllTasks", mock.Anything).Return([]model.Task{}, errors.New("err")).Once()
+// 				mockdb.On("GetAllTasks", mock.Anything).Return([]modelDB.Task{}, errors.New("err")).Once()
 // 			},
-// 			wantTasks: []model.Task{},
 // 			args: args{
 // 				ctx: context.Background(),
 // 			},

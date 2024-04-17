@@ -5,7 +5,7 @@ import (
 	// 	"base/internal/model"
 	// 	"base/internal/repository/db/task"
 	"base/internal/outbound/db/task"
-	taskUsecase "base/internal/usecases/task"
+	taskUsecase "base/internal/usecase/task"
 )
 
 type usecase struct {

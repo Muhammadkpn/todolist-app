@@ -7,7 +7,7 @@ import (
 func InitSdkLog() sdklog.Logger {
 	// init logger
 	sdklogCfg := sdklog.Config{
-		LogPath:          "./../logs",
+		LogPath:          "./logs",
 		EnableConsoleLog: true,
 		Level:            sdklog.DebugLevel,
 	}

@@ -2,10 +2,22 @@ package impl
 
 import (
 	"base/internal/outbound/db/model"
+	"base/pkg/constant"
+	pkgHelper "base/pkg/helper"
+	"context"
 )
 
-func (r *repository) UpdateTask(id int64, title string) (task model.Task, err error) {
-	// _, err = r.DbGorm.ExecContext(context.Background(), constant.UpdateTaskQuery, id, title)
+func (r *repository) UpdateTask(ctx context.Context, id int64, title string) (task model.Task, err error) {
+	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
+	defer span.End()
+
+	db := r.DbGorm.WithContext(ctx)
+	result := db.Exec(constant.UpdateTaskQuery, id, title)
+	if result.Error != nil {
+		err = result.Error
+
+		return
+	}
 
 	return
 }

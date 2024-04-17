@@ -9,10 +9,10 @@ func (c *Controller) PutTasksTaskId(ctx context.Context, request PutTasksTaskIdR
 	span, ctx := pkgHelper.UpdateCtxSpanController(ctx)
 	defer span.End()
 
-	// _, err := c.Task.UpdateTask(ctx, request.TaskId, *request.Body.Title)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	_, err := c.TaskUsecase.UpdateTask(ctx, request.TaskId, *request.Body.Title)
+	if err != nil {
+		return nil, err
+	}
 
 	return nil, nil
 }
