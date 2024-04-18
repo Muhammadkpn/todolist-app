@@ -11,7 +11,7 @@ require (
 	gitlab.banksinarmas.com/go/sdkv2/common v1.3.0
 	gitlab.banksinarmas.com/go/sdkv2/log v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/log/integrations/zap v0.0.0-20240417093748-c14d3eb6d820
-	gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240418063504-38d11d17c216
+	gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240418093055-16e24bddba48
 	gitlab.banksinarmas.com/go/sdkv2/time v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/validator/integrations/validatorV10 v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/validator/validator v1.0.0

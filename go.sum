@@ -251,6 +251,8 @@ gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240417093748-c14d3eb6d820 h
 gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240417093748-c14d3eb6d820/go.mod h1:pwebSIo36Dh6giMqCL1LSnBwv5+MoGh8Q4ycZqxZV0M=
 gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240418063504-38d11d17c216 h1:mypihu7IKjhAnAIb9gjGCGJaAfOr9mNvU0PHaF1jQsg=
 gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240418063504-38d11d17c216/go.mod h1:pwebSIo36Dh6giMqCL1LSnBwv5+MoGh8Q4ycZqxZV0M=
+gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240418093055-16e24bddba48 h1:sTFtkixlud2OWC7RJ/dP4jBqpZYIUJpGjol5xf7R34Y=
+gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240418093055-16e24bddba48/go.mod h1:pwebSIo36Dh6giMqCL1LSnBwv5+MoGh8Q4ycZqxZV0M=
 gitlab.banksinarmas.com/go/sdkv2/mandatory v1.0.0 h1:2MW0oSDbNg9AoL4Gm/ATDO4MacWiT50IXqKXtd/qHec=
 gitlab.banksinarmas.com/go/sdkv2/mandatory v1.0.0/go.mod h1:pcwoWUKl8iE6Iyx1xquaAK2kCW9Of0a+xEkG0R/48Vo=
 gitlab.banksinarmas.com/go/sdkv2/time v1.0.0 h1:7SzCOBifuxJkn5SsIHLSI1S91xBsuUZzQ8tX3dvle+A=

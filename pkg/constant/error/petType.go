@@ -1,7 +1,5 @@
 package pkgError
 
-import "errors"
-
-var (
-	ErrUnknownPetType = errors.New("unknown pet type")
+const (
+	ERR_UNKNOWN_PET_TYPE = "unknown pet type"
 )

@@ -49,12 +49,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Pet'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        default: {}
     post:
       summary: Creates a new pet
       description: Creates a new pet in the store. Duplicates are allowed
@@ -82,18 +77,6 @@ paths:
                         $ref: '#/components/schemas/Pet'
                     required:
                       - data
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseResponse'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseResponse'
         default:
           description: ''
           content:
@@ -147,6 +130,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /stores:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-stores
+      parameters: []
+      description: ''
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-stores
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewStore'
 components:
   schemas:
     Pet:
@@ -201,18 +204,31 @@ components:
           type: string
           x-stoplight:
             id: axvcaot6gkt52
-          nullable: true
         message:
           type: string
           x-stoplight:
             id: v3cjovo5chf3s
-          nullable: true
         timestamp:
           type: integer
           x-stoplight:
             id: tn5xs3zu3t3na
           format: int64
       required:
-        - code
-        - message
         - timestamp
+    NewStore:
+      title: NewStore
+      x-stoplight:
+        id: yvjuy60gnqcrz
+      type: object
+      properties:
+        name:
+          type: string
+          x-stoplight:
+            id: 8z0cwhc4n1x5o
+        address:
+          type: string
+          x-stoplight:
+            id: cnslikaw5s1lg
+      required:
+        - name
+        - address

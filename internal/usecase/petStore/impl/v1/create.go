@@ -5,7 +5,6 @@ import (
 	"base/internal/usecase/model"
 	pkgError "base/pkg/constant/error"
 	"context"
-	"fmt"
 
 	sdkError "gitlab.banksinarmas.com/go/sdkv2/common/error"
 )
@@ -13,7 +12,7 @@ import (
 // Create implements petStore.UseCase.
 func (u *usecase) Create(ctx context.Context, request model.CreatePetRequest) (model.Pet, error) {
 	if err := u.resource.Validator.Validate(request); err != nil {
-		return model.Pet{}, sdkError.New(err.Error(), fmt.Errorf("%+v: %w", err, pkgError.ErrFailedOnValidator))
+		return model.Pet{}, sdkError.New(pkgError.ERR_FAILED_ON_VALIDATOR, err)
 	}
 
 	data, err := u.outbound.Repository.PetStore.Create(ctx, u.resource.DatabaseSQL, obModel.Pet{

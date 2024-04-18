@@ -3,6 +3,7 @@ package petType
 import (
 	"database/sql/driver"
 	"encoding/json"
+	"errors"
 	"fmt"
 
 	pkgError "base/pkg/constant/error"
@@ -46,13 +47,13 @@ func (c Type) Name() string {
 func (c *Type) Scan(val interface{}) error {
 	rawVal, ok := val.(string)
 	if !ok {
-		return pkgError.ErrUnknownPetType
+		return errors.New(pkgError.ERR_UNKNOWN_PET_TYPE)
 	}
 
 	index := findIndex(rawVal)
 
 	if index == 0 {
-		return pkgError.ErrUnknownPetType
+		return errors.New(pkgError.ERR_UNKNOWN_PET_TYPE)
 	}
 
 	*c = Type(index)

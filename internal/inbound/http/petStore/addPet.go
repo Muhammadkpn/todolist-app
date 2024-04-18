@@ -5,6 +5,7 @@ import (
 	ucModel "base/internal/usecase/model"
 	pkgHelper "base/pkg/helper"
 	"context"
+	"fmt"
 
 	sdkLogger "gitlab.banksinarmas.com/go/sdkv2/log/logger"
 	sdkTime "gitlab.banksinarmas.com/go/sdkv2/time"
@@ -13,9 +14,9 @@ import (
 func (c *Controller) AddPet(ctx context.Context, request AddPetRequestObject) (AddPetResponseObject, error) {
 	data, err := c.UseCase.PetStoreV1.Create(ctx, CreatePetRequestToUcModel(request))
 	if err != nil {
-		c.Resource.Logger.Error(ctx, "Error Add Pet", sdkLogger.WithError(err))
+		c.Resource.Logger.Error(ctx, fmt.Sprintf("%s - Error Add Pet", tag), sdkLogger.WithError(err))
 
-		statusCode := pkgHelper.FromErrorMap(err, model.ErrorMap)
+		statusCode := pkgHelper.FromErrorMap(err.Error(), model.ErrorMap)
 		return AddPetdefaultJSONResponse{
 			StatusCode: statusCode,
 			Body: model.BaseResponse{

@@ -13,7 +13,7 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 	// Get all tasks
 	tasks, err := c.TaskUsecase.GetAllTasks(ctx)
 	if err != nil {
-		statusCode := pkgHelper.FromErrorMap(err, model.ErrorMap)
+		statusCode := pkgHelper.FromErrorMap(err.Error(), model.ErrorMap)
 		switch statusCode {
 		default:
 			return GetTasks500JSONResponse{Message: err.Error()}, nil
@@ -41,7 +41,7 @@ func (c *Controller) GetTasksTaskId(ctx context.Context, request GetTasksTaskIdR
 
 	task, err := c.TaskUsecase.GetTaskByID(ctx, request.TaskId)
 	if err != nil {
-		statusCode := pkgHelper.FromErrorMap(err, model.ErrorMap)
+		statusCode := pkgHelper.FromErrorMap(err.Error(), model.ErrorMap)
 		switch statusCode {
 		default:
 			return GetTasksTaskId500JSONResponse{Message: err.Error()}, nil

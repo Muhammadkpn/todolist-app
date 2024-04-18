@@ -1,7 +1,5 @@
 package pkgError
 
-import "errors"
-
-var (
-	ErrFailedOnValidator = errors.New("failed on validator")
+const (
+	ERR_FAILED_ON_VALIDATOR = "failed on validator"
 )

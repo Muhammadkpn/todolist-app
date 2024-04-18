@@ -2,6 +2,7 @@ package petStore
 
 import (
 	"base/internal/outbound/model"
+	pkgError "base/pkg/constant/error"
 	"context"
 	"fmt"
 
@@ -17,6 +18,10 @@ func (r *repository) Create(ctx context.Context, db *gorm.DB, data model.Pet) (m
 		r.resource.Logger.Error(ctx, fmt.Sprintf("%s - Error save", tag),
 			sdkLog.WithAttr("data", data),
 			sdkLog.WithError(err))
+
+		if err == gorm.ErrRecordNotFound {
+			return model.Pet{}, sdkError.New(pkgError.ERR_INVALID_ID, err)
+		}
 		return model.Pet{}, sdkError.New(err.Error(), err)
 	}
 
