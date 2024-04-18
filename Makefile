@@ -20,8 +20,14 @@ docker-down:
 
 .PHONY: test
 test:
-	@go test -cover -count=1 --race ./...
+	@go clean -testcache
+	@go test `go list ./...` -cover -coverprofile=coverage.out --race -coverpkg=./internal/usecase/...,./internal/repository/...
+	@go tool cover -func=coverage.out
 
 .PHONY: mockgen
 mockgen:
-	@go generate ./...
+	@mockery --all --keeptree --disable-version-string
+
+.PHONY: lint
+lint:
+	@golangci-lint run -v
