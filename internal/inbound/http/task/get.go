@@ -2,23 +2,22 @@ package task
 
 import (
 	"base/internal/inbound/model"
-	"base/internal/util"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject) (GetTasksResponseObject, error) {
-	// Update context and start span
-	span, ctx := util.UpdateCtxSpanController(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanController(ctx)
 	defer span.End()
 
 	// Get all tasks
 	tasks, err := c.TaskUsecase.GetAllTasks(ctx)
 	if err != nil {
-		// If there's an error, return 500 response
-		return GetTasks500JSONResponse{
-			ErrorCode:    "",
-			ErrorMessage: err.Error(),
-		}, nil
+		statusCode := pkgHelper.FromErrorMap(err, model.ErrorMap)
+		switch statusCode {
+		default:
+			return GetTasks500JSONResponse{Message: err.Error()}, nil
+		}
 	}
 
 	// Prepare response
@@ -37,15 +36,16 @@ func (c *Controller) GetTasks(ctx context.Context, request GetTasksRequestObject
 }
 
 func (c *Controller) GetTasksTaskId(ctx context.Context, request GetTasksTaskIdRequestObject) (GetTasksTaskIdResponseObject, error) {
-	span, ctx := util.UpdateCtxSpanController(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanController(ctx)
 	defer span.End()
 
 	task, err := c.TaskUsecase.GetTaskByID(ctx, request.TaskId)
 	if err != nil {
-		return GetTasksTaskId500JSONResponse{
-			ErrorCode:    "",
-			ErrorMessage: err.Error(),
-		}, nil
+		statusCode := pkgHelper.FromErrorMap(err, model.ErrorMap)
+		switch statusCode {
+		default:
+			return GetTasksTaskId500JSONResponse{Message: err.Error()}, nil
+		}
 	}
 
 	res := GetTasksTaskId200JSONResponse{

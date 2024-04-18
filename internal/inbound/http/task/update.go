@@ -1,12 +1,12 @@
 package task
 
 import (
-	"base/internal/util"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (c *Controller) PutTasksTaskId(ctx context.Context, request PutTasksTaskIdRequestObject) (PutTasksTaskIdResponseObject, error) {
-	span, ctx := util.UpdateCtxSpanController(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanController(ctx)
 	defer span.End()
 
 	_, err := c.TaskUsecase.UpdateTask(ctx, request.TaskId, *request.Body.Title)

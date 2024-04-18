@@ -1,13 +1,13 @@
 package impl
 
 import (
-	"base/internal/repository/db/model"
-	"base/internal/util"
+	"base/internal/outbound/model"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (r *repository) CreateTask(ctx context.Context, request model.Task) (response model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanRepository(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
 	db := r.DbGorm.WithContext(ctx)

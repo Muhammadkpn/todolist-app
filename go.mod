@@ -1,6 +1,6 @@
 module base
 
-go 1.21.6
+go 1.22.0
 
 require (
 	github.com/getkin/kin-openapi v0.123.0
@@ -8,8 +8,11 @@ require (
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/stretchr/testify v1.9.0
 	gitlab.banksinarmas.com/go/sdkv2/appRunner v1.0.0
-	gitlab.banksinarmas.com/go/sdkv2/common v1.0.0
+	gitlab.banksinarmas.com/go/sdkv2/common v1.3.0
 	gitlab.banksinarmas.com/go/sdkv2/log v1.0.0
+	gitlab.banksinarmas.com/go/sdkv2/log/integrations/zap v0.0.0-20240417093748-c14d3eb6d820
+	gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240418063504-38d11d17c216
+	gitlab.banksinarmas.com/go/sdkv2/time v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/validator/integrations/validatorV10 v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/validator/validator v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/webClient/integration/heimdall v1.0.0
@@ -19,6 +22,7 @@ require (
 	go.uber.org/dig v1.17.1
 	gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0
 	gopkg.in/yaml.v3 v3.0.1
+	gorm.io/driver/postgres v1.5.7
 	gorm.io/gorm v1.25.9
 )
 
@@ -92,6 +96,5 @@ require (
 	golang.org/x/tools v0.6.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220411194840-2f41105eb62f // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
-	gorm.io/driver/postgres v1.5.7 // indirect
 	howett.net/plist v0.0.0-20181124034731-591f970eefbb // indirect
 )

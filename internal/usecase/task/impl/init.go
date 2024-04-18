@@ -4,7 +4,7 @@ import (
 	// 	"base/internal/common/sdksql"
 	// 	"base/internal/model"
 	// 	"base/internal/repository/db/task"
-	"base/internal/repository/db/task"
+	"base/internal/outbound/db/task"
 	taskUsecase "base/internal/usecase/task"
 )
 

@@ -61,8 +61,7 @@ func TestController_GetTasks(t *testing.T) {
 				mockTaskUsecase.On("GetAllTasks", mock.Anything).Return([]modelUsecase.Task{}, errors.New("err")).Once()
 			},
 			want: GetTasks500JSONResponse{
-				ErrorCode:    "",
-				ErrorMessage: "err",
+				Message: "err",
 			},
 			wantErr: false,
 		},

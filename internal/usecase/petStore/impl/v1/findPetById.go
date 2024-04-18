@@ -8,8 +8,8 @@ import (
 
 func (*usecase) FindPetByID(ctx context.Context, id uint64) (model.Pet, error) {
 	return model.Pet{
-		ID:   1,
-		Name: "Max",
-		Type: petType.Dog,
+		ID:      1,
+		Name:    "Max",
+		PetType: petType.Dog,
 	}, nil
 }

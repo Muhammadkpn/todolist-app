@@ -1,12 +1,12 @@
 package task
 
 import (
-	"base/internal/util"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (c *Controller) DeleteTasksTaskId(ctx context.Context, request DeleteTasksTaskIdRequestObject) (DeleteTasksTaskIdResponseObject, error) {
-	span, ctx := util.UpdateCtxSpanController(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanController(ctx)
 	defer span.End()
 
 	err := c.TaskUsecase.DeleteTask(ctx, request.TaskId)

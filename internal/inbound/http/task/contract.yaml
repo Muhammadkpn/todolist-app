@@ -3,42 +3,128 @@ tags:
   - name: Tasks
     description: API operations related to tasks
 x-stoplight:
-  id: hv9aajgmhu4sd
+  id: mr7b6i51sz5jz
 info:
   title: Template
-  version: "1.0"
+  version: '1.0'
   description: endpoint list for task
   license:
     name: Your License Name
-    url: "https://example.com/license"
+    url: 'https://example.com/license'
   contact:
     name: Your Name
     email: your.email@example.com
     url: example.com
 servers:
-  - url: "http://localhost:3000"
+  - url: 'http://localhost:3000'
 paths:
-  /tasks:
+  '/tasks/{taskId}':
+    parameters:
+      - schema:
+          type: integer
+          format: int64
+        name: taskId
+        in: path
+        description: existing task id to be find
+        required: true
     get:
-      summary: Get all tasks
+      summary: Get specific task by id
       responses:
-        "200":
+        '200':
           description: Shared Response
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: "#/components/schemas/baseResponse"
+                  - type: object
+                    x-stoplight:
+                      id: js9kqzluwjfsm
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Task'
+                  - $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Shared Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+              examples:
+                Example 1:
+                  value:
+                    message: string
+                    timestamp: 0
+                    process_time: 0
+      operationId: get-tasks-taskId
+      x-stoplight:
+        id: prpnh1qb55b0m
+      parameters: []
+      description: Get specific task by task_id
+    put:
+      summary: Update task
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+      operationId: put-tasks-taskId
+      x-stoplight:
+        id: 32f6cdw3m8gpd
+      requestBody:
+        description: task properties to update
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  x-stoplight:
+                    id: 322im5im2rp9n
+            examples:
+              Example 1:
+                value:
+                  title: title baru
+      description: Update task detail
+    delete:
+      summary: Delete task
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+      operationId: delete-tasks-taskId
+      x-stoplight:
+        id: sko8a94iuvm2q
+      description: delete task endpoint
+  /tasks:
+    get:
+      summary: Get all tasks
+      responses:
+        '200':
+          description: Shared Response
+          content:
+            application/json:
+              schema:
+                allOf:
                   - x-stoplight:
-                      id: nb66j29zb1t22
+                      id: jk5w0b2s4svyc
                     type: object
                     properties:
                       data:
                         type: array
                         x-stoplight:
-                          id: rsxhwlxaorsa7
+                          id: fwl3vg06ua67i
                         items:
-                          $ref: "#/components/schemas/Task"
+                          $ref: '#/components/schemas/Task'
+                  - $ref: '#/components/schemas/BaseResponse'
               examples:
                 Example 1:
                   value:
@@ -48,12 +134,12 @@ paths:
                       - id: 0
                         title: string
                         status: 0
-        "500":
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/baseResponse"
+                $ref: '#/components/schemas/BaseResponse'
               examples:
                 Example 1:
                   value:
@@ -65,36 +151,40 @@ paths:
                     error_message: string
       operationId: get-tasks
       x-stoplight:
-        id: oqfrdy44c609p
-      description: "Get "
+        id: jc08h943txlln
+      description: 'Get '
     post:
       summary: Create task
       operationId: post-tasks
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/baseResponse"
+                $ref: '#/components/schemas/BaseResponse'
               examples:
                 Example 1:
                   value:
-                    error_code: string
-                    error_message: string
-        "500":
+                    message: success
+                    timestamp: 1707190114
+                    process_time: 150
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/baseResponse"
+                $ref: '#/components/schemas/BaseResponse'
               examples:
                 Example 1:
                   value:
                     error_code: string
                     error_message: string
       x-stoplight:
-        id: mloywbl6oucmp
+        id: kho6ygmj03lrq
       description: Add Task
       parameters: []
       requestBody:
@@ -108,104 +198,17 @@ paths:
                 title:
                   type: string
                   x-stoplight:
-                    id: icbplm9w7d1qb
+                    id: pqewevjrncqwg
             examples:
               Example 1:
                 value:
                   title: task 1
-  "/tasks/{taskId}":
-    parameters:
-      - schema:
-          type: integer
-          format: int64
-        name: taskId
-        in: path
-        description: existing task id to be find
-        required: true
-    get:
-      summary: Get specific task by id
-      responses:
-        "200":
-          description: Shared Response
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/baseResponse"
-                  - type: object
-                    x-stoplight:
-                      id: d0w1se1ialpql
-                    properties:
-                      data:
-                        $ref: "#/components/schemas/Task"
-              examples:
-                Example 1:
-                  value:
-                    error_code: string
-                    error_message: string
-                    data:
-                      id: 0
-                      title: string
-                      status: 0
-        "500":
-          description: Shared Response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/baseResponse"
-              examples:
-                Example 1:
-                  value:
-                    error_code: string
-                    error_message: string
-      operationId: get-tasks-taskId
-      x-stoplight:
-        id: a1h8yepfkwlh2
-      parameters: []
-      description: Get specific task by task_id
-    put:
-      summary: Update task
-      responses:
-        "200":
-          $ref: "#/components/responses/BaseResponse"
-        "500":
-          $ref: "#/components/responses/BaseResponse"
-      operationId: put-tasks-taskId
-      x-stoplight:
-        id: k9z4qowh5iuyu
-      requestBody:
-        description: task properties to update
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  x-stoplight:
-                    id: r8109c3qr0l2f
-            examples:
-              Example 1:
-                value:
-                  title: title baru
-      description: Update task detail
-    delete:
-      summary: Delete task
-      responses:
-        "200":
-          $ref: "#/components/responses/BaseResponse"
-        "500":
-          $ref: "#/components/responses/BaseResponse"
-      operationId: delete-tasks-taskId
-      x-stoplight:
-        id: 2yfk80l989she
-      description: delete task endpoint
 components:
   schemas:
     Task:
       title: Task
       x-stoplight:
-        id: 6ik83chrljzbx
+        id: semgxfb01vwc6
       type: object
       description: Model for task
       required:
@@ -216,47 +219,34 @@ components:
         id:
           type: integer
           x-stoplight:
-            id: 4jpc8wh7caqgc
+            id: fk9wikxdne1m4
           format: int64
         title:
           type: string
           x-stoplight:
-            id: lrx0s4fejkav7
+            id: z4igsrq585cms
         status:
           type: integer
           x-stoplight:
-            id: 1ewevm6jvwqhd
-    baseResponse:
+            id: fhplzavszdw70
+    BaseResponse:
       title: Base Response
       x-stoplight:
-        id: 03wbo9cgnjofn
+        id: obfvmj6b6dcwi
       type: object
-      x-examples:
-        Example 2:
-          error_code: string
-          error_message: string
-      required:
-        - error_code
-        - error_message
+      x-examples: {}
       properties:
-        error_code:
+        message:
           type: string
           x-stoplight:
-            id: ip18nrnkuqm0r
-        error_message:
+            id: 2vxmyrpppy1b1
+        timestamp:
+          type: integer
+          x-stoplight:
+            id: zxd0klb8snan2
+        code:
           type: string
           x-stoplight:
-            id: x1z7jh9sdutiu
-  responses:
-    BaseResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/baseResponse"
-          examples:
-            Example 1:
-              value:
-                error_code: string
-                error_message: string
+            id: mwd2oquilqq2r
+  responses: {}
 x-internal: false

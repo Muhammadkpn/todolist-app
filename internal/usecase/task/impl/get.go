@@ -2,12 +2,12 @@ package impl
 
 import (
 	"base/internal/usecase/model"
-	"base/internal/util"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanUsecase(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
 	res, err := u.TaskRepository.GetAllTasks(ctx)
@@ -27,7 +27,7 @@ func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err erro
 }
 
 func (u *usecase) GetTaskByID(ctx context.Context, id int64) (task model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanUsecase(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
 	_, err = u.TaskRepository.GetTaskByID(ctx, id)

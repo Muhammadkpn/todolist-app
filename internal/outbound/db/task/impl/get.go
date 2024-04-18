@@ -1,13 +1,13 @@
 package impl
 
 import (
-	"base/internal/repository/db/model"
-	"base/internal/util"
+	"base/internal/outbound/model"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (r *repository) GetAllTasks(ctx context.Context) (tasks []model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanRepository(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
 	db := r.DbGorm.WithContext(ctx)
@@ -22,7 +22,7 @@ func (r *repository) GetAllTasks(ctx context.Context) (tasks []model.Task, err e
 }
 
 func (r *repository) GetTaskByID(ctx context.Context, id int64) (task model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanRepository(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
 	db := r.DbGorm.WithContext(ctx)

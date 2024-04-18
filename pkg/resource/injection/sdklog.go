@@ -1,17 +1,13 @@
 package injection
 
 import (
-	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
+	sdkZap "gitlab.banksinarmas.com/go/sdkv2/log/integrations/zap"
+	sdkLog "gitlab.banksinarmas.com/go/sdkv2/log/logger"
 )
 
-func InitSdkLog() sdklog.Logger {
-	// init logger
-	sdklogCfg := sdklog.Config{
-		LogPath:          "./logs",
-		EnableConsoleLog: true,
-		Level:            sdklog.DebugLevel,
-	}
-	sdklog := sdklog.InitLogger(sdklogCfg)
-
-	return sdklog
+func NewLogger() sdkLog.Logger {
+	return sdkZap.New(
+		sdkZap.WithLogPath("./logs"),
+		sdkZap.WithEnableConsoleLog(true),
+	)
 }

@@ -3,7 +3,7 @@ package pkgDi
 import (
 	"sync"
 
-	"base/internal/repository"
+	"base/internal/outbound"
 	usecase "base/internal/usecase"
 	pkgConfig "base/pkg/config"
 	pkgResource "base/pkg/resource"
@@ -37,7 +37,7 @@ func Container() (*dig.Container, error) {
 			return
 		}
 
-		if err := repository.Register(container); err != nil {
+		if err := outbound.Register(container); err != nil {
 			outer = err
 
 			return

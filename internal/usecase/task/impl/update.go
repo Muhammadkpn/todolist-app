@@ -2,12 +2,12 @@ package impl
 
 import (
 	"base/internal/usecase/model"
-	"base/internal/util"
+	pkgHelper "base/pkg/helper"
 	"context"
 )
 
 func (u *usecase) UpdateTask(ctx context.Context, id int64, title string) (task model.Task, err error) {
-	span, ctx := util.UpdateCtxSpanUsecase(ctx)
+	span, ctx := pkgHelper.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
 	_, err = u.TaskRepository.UpdateTask(ctx, id, title)
