@@ -7,7 +7,7 @@ app:
 
 database:
   host: localhost
-  port: 6543
-  username: admin
-  password: admin
-  schema: template
+  port: 5432
+  username: postgres
+  password: password
+  schema: postgres

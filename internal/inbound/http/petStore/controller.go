@@ -2,6 +2,7 @@ package petStore
 
 import (
 	usecase "base/internal/usecase"
+	"base/pkg/resource"
 
 	"go.uber.org/dig"
 )
@@ -9,7 +10,8 @@ import (
 type Controller struct {
 	dig.In
 
-	UseCase usecase.Usecase
+	UseCase  usecase.Usecase
+	Resource resource.Resource
 }
 
 var _ StrictServerInterface = (*Controller)(nil)

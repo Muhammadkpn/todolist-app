@@ -6,10 +6,10 @@ import (
 	"go.uber.org/dig"
 )
 
-type Repository struct {
+type Outbound struct {
 	dig.In
 
-	Db dbRepo.Repository
+	Repository dbRepo.Repository
 }
 
 func Register(container *dig.Container) error {

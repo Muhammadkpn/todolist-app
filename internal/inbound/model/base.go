@@ -5,5 +5,5 @@ import (
 )
 
 type (
-	BaseResponse sdkResponse.Response
+	BaseResponse sdkResponse.BaseResponse
 )

@@ -1,7 +1,7 @@
 package impl
 
 import (
-	dbModel "base/internal/outbound/db/model"
+	dbModel "base/internal/outbound/model"
 	"base/internal/usecase/model"
 	pkgHelper "base/pkg/helper"
 	"context"

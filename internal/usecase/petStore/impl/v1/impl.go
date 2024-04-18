@@ -1,13 +1,21 @@
 package petStoreV1
 
 import (
+	"base/internal/outbound"
 	"base/internal/usecase/petStore"
+	pkgResource "base/pkg/resource"
 )
 
 type (
-	usecase struct{}
+	usecase struct {
+		outbound outbound.Outbound
+		resource pkgResource.Resource
+	}
 )
 
-func New() petStore.UseCase {
-	return &usecase{}
+func New(outbound outbound.Outbound, resource pkgResource.Resource) petStore.UseCase {
+	return &usecase{
+		outbound: outbound,
+		resource: resource,
+	}
 }

@@ -16,12 +16,12 @@ func Register(container *dig.Container) error {
 		return fmt.Errorf("[DI] cannot initialize Validator: %+v", err)
 	}
 
-	if err := container.Provide(injection.InitGorm); err != nil {
+	if err := container.Provide(injection.NewDatabase); err != nil {
 		return fmt.Errorf("[DI] cannot initialize Gorm: %+v", err)
 	}
 
-	if err := container.Provide(injection.InitSdkLog); err != nil {
-		return fmt.Errorf("[DI] cannot initialize Sdklog: %+v", err)
+	if err := container.Provide(injection.NewLogger); err != nil {
+		return fmt.Errorf("[DI] cannot initialize Logger: %+v", err)
 	}
 
 	return nil

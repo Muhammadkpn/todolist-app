@@ -3,10 +3,11 @@ package resource
 import (
 	pkgConfig "base/pkg/config"
 
-	sdklog "gitlab.banksinarmas.com/go/sdkv2/log"
+	sdkLog "gitlab.banksinarmas.com/go/sdkv2/log/logger"
 	sdkValidator "gitlab.banksinarmas.com/go/sdkv2/validator/validator"
 	sdkWebClient "gitlab.banksinarmas.com/go/sdkv2/webClient/webClient"
 	"go.uber.org/dig"
+	"gorm.io/gorm"
 )
 
 type (
@@ -19,8 +20,10 @@ type (
 		// WebClientFactory is web client factory to produce WebClient
 		WebClientFactory sdkWebClient.Factory
 
-		Sdklog sdklog.Logger
+		Logger sdkLog.Logger
 
 		Validator sdkValidator.Validator
+
+		DatabaseSQL *gorm.DB
 	}
 )

@@ -1,7 +1,7 @@
 package impl
 
 import (
-	"base/internal/outbound/db/model"
+	"base/internal/outbound/model"
 	"context"
 	"errors"
 	"reflect"

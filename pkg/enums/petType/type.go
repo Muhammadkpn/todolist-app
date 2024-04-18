@@ -59,9 +59,9 @@ func (c *Type) Scan(val interface{}) error {
 	return nil
 }
 
-func findIndex(name string) int {
+func findIndex(code string) int {
 	for i, constant := range constants {
-		if constant.Name == name {
+		if constant.Code == code {
 			return i + 1
 		}
 	}

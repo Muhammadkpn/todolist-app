@@ -4,9 +4,11 @@ import (
 	"base/internal/inbound"
 	pkgDi "base/pkg/di"
 	pkgResource "base/pkg/resource"
+	"context"
 
 	sdkRunner "gitlab.banksinarmas.com/go/sdkv2/appRunner"
 	sdkServer "gitlab.banksinarmas.com/go/sdkv2/appRunner/server"
+	sdkLogger "gitlab.banksinarmas.com/go/sdkv2/log/logger"
 	"go.uber.org/dig"
 )
 
@@ -51,8 +53,9 @@ func run(container *dig.Container) error {
 // the execution of the main function. It attempts to invoke a function
 // for additional error handling and prints the error if it persists.
 func onError(container *dig.Container, err error) {
-	err = container.Invoke(func() error {
+	err = container.Invoke(func(logger sdkLogger.Logger) error {
 		if err != nil {
+			logger.Info(context.Background(), err.Error())
 			return err
 		}
 		return nil
