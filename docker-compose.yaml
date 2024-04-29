@@ -45,8 +45,9 @@ services:
       - ELASTIC_APM_SERVER_URL=http://apm-servertemplate:8200
       - ENV=staging
     volumes:
-      - ./:/app
-      - app-logs:/logs
+      - ./variables/:/app/variables
+      - ./logs/:/app/logs
+      # - app-logs:/logs
 
   apm-server:
     container_name: apm-servertemplate

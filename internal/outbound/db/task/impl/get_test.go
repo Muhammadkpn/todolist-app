@@ -51,7 +51,7 @@ func Test_repository_GetAllTasks(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.mock()
 			r := &repository{
-				DbGorm: gormDB,
+				Db: gormDB,
 			}
 			gotTasks, err := r.GetAllTasks(context.Background())
 			if (err != nil) != tt.wantErr {

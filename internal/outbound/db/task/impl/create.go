@@ -10,7 +10,7 @@ func (r *repository) CreateTask(ctx context.Context, request model.Task) (respon
 	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
-	db := r.DbGorm.WithContext(ctx)
+	db := r.Db.WithContext(ctx)
 	result := db.Table("task").Create(&request)
 	if result.Error != nil {
 		err = result.Error

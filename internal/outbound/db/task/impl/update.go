@@ -11,7 +11,7 @@ func (r *repository) UpdateTask(ctx context.Context, id int64, title string) (ta
 	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
-	db := r.DbGorm.WithContext(ctx)
+	db := r.Db.WithContext(ctx)
 	result := db.Exec(constant.UpdateTaskQuery, id, title)
 	if result.Error != nil {
 		err = result.Error

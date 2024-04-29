@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	healthCheckUsecaseImpl "base/internal/usecase/healthCheck/impl"
 	"base/internal/usecase/petStore"
 	petStoreV1 "base/internal/usecase/petStore/impl/v1"
 	"base/internal/usecase/shared"
@@ -22,6 +23,11 @@ type Usecase struct {
 // (required)depedency injection for usecase, for inject the depedency we need to provide usecase`s init func in the register function
 func Register(container *dig.Container) error {
 	err := container.Provide(taskUsecaseImpl.New)
+	if err != nil {
+		return err
+	}
+
+	err = container.Provide(healthCheckUsecaseImpl.New)
 	if err != nil {
 		return err
 	}
