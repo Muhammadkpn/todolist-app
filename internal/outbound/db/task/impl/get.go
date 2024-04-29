@@ -10,7 +10,7 @@ func (r *repository) GetAllTasks(ctx context.Context) (tasks []model.Task, err e
 	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
-	db := r.DbGorm.WithContext(ctx)
+	db := r.Db.WithContext(ctx)
 	result := db.Table("task").Where("status = ?", 1).Find(&tasks)
 	if result.Error != nil {
 		err = result.Error
@@ -25,7 +25,7 @@ func (r *repository) GetTaskByID(ctx context.Context, id int64) (task model.Task
 	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
-	db := r.DbGorm.WithContext(ctx)
+	db := r.Db.WithContext(ctx)
 	result := db.Table("task").Where("id = ?", id).First(&task)
 	if result.Error != nil {
 		err = result.Error

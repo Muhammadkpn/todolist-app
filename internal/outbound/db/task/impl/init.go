@@ -3,18 +3,19 @@ package impl
 import (
 	taskRepository "base/internal/outbound/db/task"
 	pkgConfig "base/pkg/config"
+	"base/pkg/resource/model"
 
 	"gorm.io/gorm"
 )
 
 type repository struct {
-	DbGorm *gorm.DB
+	Db     *gorm.DB
 	Config pkgConfig.Config
 }
 
-func New(dbGorm *gorm.DB, cfg pkgConfig.Config) taskRepository.Repository {
+func New(dbList model.Database, cfg pkgConfig.Config) taskRepository.Repository {
 	return &repository{
-		DbGorm: dbGorm,
+		Db:     dbList.Template,
 		Config: cfg,
 	}
 }

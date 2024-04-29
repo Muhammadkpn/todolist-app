@@ -15,7 +15,7 @@ func (u *usecase) Create(ctx context.Context, request model.CreatePetRequest) (m
 		return model.Pet{}, sdkError.New(pkgError.ERR_FAILED_ON_VALIDATOR, err)
 	}
 
-	data, err := u.outbound.Repository.PetStore.Create(ctx, u.resource.DatabaseSQL, obModel.Pet{
+	data, err := u.outbound.Repository.PetStore.Create(ctx, u.resource.DatabaseSQL.Template, obModel.Pet{
 		Name:    request.Name,
 		PetType: request.PetType,
 	})

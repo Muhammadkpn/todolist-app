@@ -7,7 +7,6 @@ import (
 )
 
 func (r *repository) DeleteTask(ctx context.Context, id int64) (err error) {
-	// _, err = r.Db.ExecContext(context.Background(), constant.DeleteTaskQuery, id)
 	span, ctx := pkgHelper.UpdateCtxSpanRepository(ctx)
 	defer span.End()
 
@@ -15,7 +14,7 @@ func (r *repository) DeleteTask(ctx context.Context, id int64) (err error) {
 		ID: id,
 	}
 
-	db := r.DbGorm.WithContext(ctx)
+	db := r.Db.WithContext(ctx)
 	result := db.Model(task).Update("status", 0)
 	if result.Error != nil {
 		err = result.Error

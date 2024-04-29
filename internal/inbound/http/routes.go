@@ -1,6 +1,7 @@
 package http
 
 import (
+	"base/internal/inbound/http/healthCheck"
 	"base/internal/inbound/http/petStore"
 	"base/internal/inbound/http/task"
 	"base/internal/inbound/http/user"
@@ -17,15 +18,19 @@ type Inbound struct {
 
 	Resource pkgResource.Resource
 
-	PetStore petStore.Controller
-	Task     task.Controller
-	User     user.Controller
+	PetStore    petStore.Controller
+	Task        task.Controller
+	User        user.Controller
+	HealthCheck healthCheck.Controller
 }
 
 func (i Inbound) Routes(ec *echo.Echo) {
 	ec.Use(sdkHttpMiddleware.AppContext())
 	ec.Validator = i.Resource.Validator
 	base := ec.Group(i.Resource.Config.AppConfig.BasePath)
+
+	// route for service health_check, mandatory to add if add new depedencies currently only postgres
+	ec.GET("/health_check", i.HealthCheck.HealthCheck)
 
 	v1 := base.Group("/v1")
 
