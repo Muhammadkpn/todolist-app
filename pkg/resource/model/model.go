@@ -19,8 +19,8 @@ type HealthCheckResponse struct {
 	Type   string
 	Host   string
 	Status string
-	Error  error             `json:"omitempty"`
-	Detail map[string]string `json:"omitempty"`
+	Error  error             `json:"error,omitempty"`
+	Detail map[string]string `json:"detail,omitempty"`
 }
 
 // Ping performs a health check on the database connection and returns an array of HealthCheckResponse.
