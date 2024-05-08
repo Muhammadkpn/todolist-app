@@ -9,5 +9,6 @@ func NewLogger() sdkLog.Logger {
 	return sdkZap.New(
 		sdkZap.WithLogPath("./logs"),
 		sdkZap.WithEnableConsoleLog(true),
+		sdkZap.WithLevel(sdkZap.DebugLevel), // dev only, log from debug level
 	)
 }

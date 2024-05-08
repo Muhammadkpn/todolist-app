@@ -1,15 +1,23 @@
 app:
+  name: sample-project
+  version: 1.0.0
+  base-path:
   port: 3031
-  host: person.host
-  write_timeout: 15
-  read_timeout: 15
-
+  gracefull-duration: 10s
 database:
-  host: db.host
-  port: 5432
-  username: admin
-  password: admin
-  schema: template
-
-feature_flag:
-  use_gorm: true
+  template:
+    name: template
+    driver: postgres
+    host: db.host
+    port: 5432
+    username: admin
+    password: admin
+    schema: template
+  oracle:
+    name: template
+    driver: oracle
+    host: 10.32.1.19
+    port: 1521
+    username: SIMASVIRTUALUAT
+    password: simasvirtual
+    schema: ORCL

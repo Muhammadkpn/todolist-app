@@ -47,7 +47,7 @@ services:
     volumes:
       - ./variables/:/app/variables
       - ./logs/:/app/logs
-      # - app-logs:/logs
+      - app-logs:/app/logs
 
   apm-server:
     container_name: apm-servertemplate
