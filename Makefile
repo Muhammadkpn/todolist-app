@@ -2,6 +2,10 @@
 build-http:
 	@go build -v -o bin/http cmd/http/*.go
 
+.PHONY: build-http-non-di
+build-http-non-di:
+	@go build -v -o bin/httpNonDi cmd/httpNonDi/*.go
+
 .PHONY: run-http
 run-http:
 	@go run -race -v cmd/http/main.go
