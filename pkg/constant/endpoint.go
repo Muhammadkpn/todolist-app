@@ -1,10 +1,6 @@
 package constant
 
-const (
-	// task
-	EndpointCreateTask      = "/tasks"
-	EndpointGetAllTask      = "/tasks"
-	EndpointGetSpecificTask = "/tasks/:id"
-	EndpointUpdateTask      = "/tasks/:id"
-	EndpointDeleteTask      = "/tasks/:id"
-)
+// endpoint_method -> [tasks_GET]
+var MapWhitelistLogEndpoint = map[string]bool{
+	"/tasks_GET": true,
+}
