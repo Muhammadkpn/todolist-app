@@ -9,8 +9,9 @@ import (
 
 type (
 	Config struct {
-		AppConfig AppConfig `yaml:"app"`
-		Database  Database  `yaml:"database"`
+		AppConfig AppConfig  `yaml:"app"`
+		Database  Database   `yaml:"database"`
+		Auth      AuthConfig `yaml:"auth"`
 	}
 )
 

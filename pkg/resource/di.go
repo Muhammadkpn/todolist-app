@@ -17,7 +17,7 @@ func Register(container *dig.Container) error {
 	}
 
 	if err := container.Provide(injection.NewDatabase); err != nil {
-		return fmt.Errorf("[DI] cannot initialize Gorm: %+v", err)
+		return fmt.Errorf("[DI] cannot initialize Database: %+v", err)
 	}
 
 	if err := container.Provide(injection.NewLogger); err != nil {
