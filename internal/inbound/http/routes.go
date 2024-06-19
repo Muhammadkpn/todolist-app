@@ -10,6 +10,8 @@ import (
 	sdkHttpMiddleware "gitlab.banksinarmas.com/go/sdkv2/appRunner/middleware/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+
 	"go.uber.org/dig"
 )
 
@@ -26,6 +28,13 @@ type Inbound struct {
 
 func (i Inbound) Routes(ec *echo.Echo) {
 	ec.Use(sdkHttpMiddleware.AppContext())
+
+	// middleware for log req and res
+	ec.Use(middleware.BodyDumpWithConfig(middleware.BodyDumpConfig{
+		Skipper: skipBodyDump,
+		Handler: myBodyDumpHandler,
+	}))
+
 	ec.Validator = i.Resource.Validator
 	base := ec.Group(i.Resource.Config.AppConfig.BasePath)
 
