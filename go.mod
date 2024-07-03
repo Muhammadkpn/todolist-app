@@ -11,11 +11,11 @@ require (
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/stretchr/testify v1.9.0
-	gitlab.banksinarmas.com/go/sdkv2/appRunner v1.5.0
+	gitlab.banksinarmas.com/go/sdkv2/appRunner v1.6.0
 	gitlab.banksinarmas.com/go/sdkv2/authentication/auth v1.0.1
 	gitlab.banksinarmas.com/go/sdkv2/authentication/integrations/activeDirectory v0.0.3
 	gitlab.banksinarmas.com/go/sdkv2/common v1.3.0
-	gitlab.banksinarmas.com/go/sdkv2/log/integrations/zap v0.0.0-20240502074011-13926f7782a6
+	gitlab.banksinarmas.com/go/sdkv2/log/integrations/zap v1.6.0
 	gitlab.banksinarmas.com/go/sdkv2/log/logger v0.0.0-20240502074011-13926f7782a6
 	gitlab.banksinarmas.com/go/sdkv2/time v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/validator/integrations/validatorV10 v1.0.0
