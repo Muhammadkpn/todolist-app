@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 
 	oracle "github.com/godoes/gorm-oracle"
-	postgres "go.elastic.co/apm/module/apmgormv2/driver/postgres"
+	postgres "go.elastic.co/apm/module/apmgormv2/v2/driver/postgres"
 )
 
 // example with postgres and oracle, please comment unused database

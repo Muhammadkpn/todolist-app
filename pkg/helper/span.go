@@ -5,7 +5,7 @@ import (
 	"runtime"
 	"strings"
 
-	"go.elastic.co/apm"
+	"go.elastic.co/apm/v2"
 )
 
 func GetCurrentFuncName() string {
