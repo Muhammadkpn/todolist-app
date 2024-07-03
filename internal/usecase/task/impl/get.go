@@ -1,7 +1,6 @@
 package impl
 
 import (
-	outboundModel "base/internal/outbound/model"
 	"base/internal/usecase/model"
 	pkgHelper "base/pkg/helper"
 	"context"
@@ -17,10 +16,10 @@ func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err erro
 	}
 
 	// sample call auth
-	u.AuthRepository["active_directory"].Login(ctx, outboundModel.AuthRequest{
-		Username: "025632",
-		Password: "BSM123bsm",
-	})
+	// resAd, errAd := u.AuthRepository["active_directory"].Login(ctx, outboundModel.AuthRequest{
+	// 	Username: "025632",
+	// 	Password: "BSM123bsm",
+	// })
 
 	for _, data := range res {
 		tasks = append(tasks, model.Task{

@@ -21,3 +21,14 @@ database:
     username: SIMASVIRTUALUAT
     password: simasvirtual
     schema: ORCL
+auth:
+  active_directory:
+    network: tcp
+    address:
+      - host: 10.22.103.178
+        port: 389
+      - host: 10.22.103.178
+        port: 389
+    username: golang1
+    password: BSM123bsm!
+    base_distinguish_name: DC=banksinarmas,DC=com
