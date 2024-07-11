@@ -30,10 +30,16 @@ func (r *repository) Login(ctx context.Context, req model.AuthRequest) (res mode
 		Address:             address,
 	})
 
-	_, err = authAd.Login(ctx, sdkAuth.AuthRequest{
+	resAd, err := authAd.Login(ctx, sdkAuth.AuthRequest{
 		Username: req.Username,
 		Password: req.Password,
+		AppName:  req.AppName,
 	})
+
+	res = model.AuthResponse{
+		RoleList: resAd.RoleList,
+		FullName: res.FullName,
+	}
 
 	return
 }
