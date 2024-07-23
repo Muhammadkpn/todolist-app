@@ -11,8 +11,10 @@ func (u *usecase) HealthCheck(ctx context.Context) (res []model.HealthCheckRespo
 	defer span.End()
 
 	// database
-	hc := u.Db.Ping(ctx, u.cfg)
-	res = append(res, hc...)
+	res = append(res, u.Db.Ping(ctx, u.cfg)...)
+
+	// redis
+	res = append(res, u.Redis.Ping(ctx, u.cfg)...)
 
 	// add more depedencies if exist
 

@@ -12,6 +12,7 @@ type (
 		AppConfig AppConfig  `yaml:"app"`
 		Database  Database   `yaml:"database"`
 		Auth      AuthConfig `yaml:"auth"`
+		Redis     Redis      `yaml:"redis"`
 	}
 )
 

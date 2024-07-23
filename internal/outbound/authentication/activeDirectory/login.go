@@ -1,7 +1,7 @@
 package activedirectory
 
 import (
-	"base/internal/outbound/model"
+	"base/internal/outbound/authentication/model"
 	pkgHelper "base/pkg/helper"
 	"context"
 

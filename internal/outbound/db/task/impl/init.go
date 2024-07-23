@@ -1,7 +1,7 @@
 package impl
 
 import (
-	taskRepository "base/internal/outbound/db/task"
+	taskDb "base/internal/outbound/db/task"
 	pkgConfig "base/pkg/config"
 	"base/pkg/resource/model"
 
@@ -13,7 +13,7 @@ type repository struct {
 	Config pkgConfig.Config
 }
 
-func New(dbList model.Database, cfg pkgConfig.Config) taskRepository.Repository {
+func New(dbList model.Database, cfg pkgConfig.Config) taskDb.Repository {
 	return &repository{
 		Db:     dbList.Template,
 		Config: cfg,

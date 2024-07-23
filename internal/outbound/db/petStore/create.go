@@ -1,7 +1,7 @@
 package petStore
 
 import (
-	"base/internal/outbound/model"
+	"base/internal/outbound/db/model"
 	pkgError "base/pkg/constant/error"
 	"context"
 	"fmt"

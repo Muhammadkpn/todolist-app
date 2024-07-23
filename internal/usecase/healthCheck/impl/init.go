@@ -7,13 +7,15 @@ import (
 )
 
 type usecase struct {
-	Db  model.Database
-	cfg pkgConfig.Config
+	Db    model.Database
+	Redis model.Redis
+	cfg   pkgConfig.Config
 }
 
-func New(dbList model.Database, cfg pkgConfig.Config) healthCheckUsecase.Usecase {
+func New(dbList model.Database, redisList model.Redis, cfg pkgConfig.Config) healthCheckUsecase.Usecase {
 	return &usecase{
-		Db:  dbList,
-		cfg: cfg,
+		Db:    dbList,
+		Redis: redisList,
+		cfg:   cfg,
 	}
 }

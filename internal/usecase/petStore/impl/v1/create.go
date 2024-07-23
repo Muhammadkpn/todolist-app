@@ -1,7 +1,7 @@
 package petStoreV1
 
 import (
-	obModel "base/internal/outbound/model"
+	obModel "base/internal/outbound/db/model"
 	"base/internal/usecase/model"
 	pkgError "base/pkg/constant/error"
 	"context"

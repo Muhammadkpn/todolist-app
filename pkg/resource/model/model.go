@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
@@ -14,13 +15,18 @@ type Database struct {
 	Oracle   *gorm.DB
 }
 
+type Redis struct {
+	Main *redis.Client
+}
+
 type HealthCheckResponse struct {
-	Name   string
-	Type   string
-	Host   string
-	Status string
-	Error  error             `json:"error,omitempty"`
-	Detail map[string]string `json:"detail,omitempty"`
+	Name     string
+	Type     string
+	Host     string
+	Status   string
+	Error    error             `json:"error,omitempty"`
+	ErrorMsg string            `json:"error_msg,omitempty"`
+	Detail   map[string]string `json:"detail,omitempty"`
 }
 
 // Ping performs a health check on the database connection and returns an array of HealthCheckResponse.
@@ -50,20 +56,57 @@ func (d *Database) Ping(ctx context.Context, cfg pkgConfig.Config) []HealthCheck
 	return res
 }
 
+func (r *Redis) Ping(ctx context.Context, cfg pkgConfig.Config) []HealthCheckResponse {
+	var res []HealthCheckResponse
+
+	// main
+	_, errMain := r.Main.Ping(ctx).Result()
+	res = append(res, generateHealthCheckResponseRedis(cfg.Redis.Main, errMain))
+
+	return res
+}
+
 // generateHealthCheckResponse generates a HealthCheckResponse based on the provided database configuration
 // and the error occurred during the health check.
 // It determines the status of the connection (Up or Down) and includes any error information.
 func generateHealthCheckResponse(db pkgConfig.DatabaseCfg, err error) HealthCheckResponse {
+	var errMsg string
+	if err != nil {
+		errMsg = err.Error()
+	}
+
 	status := constant.Up
 	if err != nil {
 		status = constant.Down
 	}
 
 	return HealthCheckResponse{
-		Name:   db.Name,
-		Type:   fmt.Sprintf("%s/%s", constant.ServiceDatabase, db.Driver),
-		Host:   db.Host,
-		Status: status,
-		Error:  err,
+		Name:     db.Name,
+		Type:     fmt.Sprintf("%s/%s", constant.ServiceDatabase, db.Driver),
+		Host:     db.Host,
+		Status:   status,
+		Error:    err,
+		ErrorMsg: errMsg,
+	}
+}
+
+func generateHealthCheckResponseRedis(redis pkgConfig.RedisCfg, err error) HealthCheckResponse {
+	var errMsg string
+	if err != nil {
+		errMsg = err.Error()
+	}
+
+	status := constant.Up
+	if err != nil {
+		status = constant.Down
+	}
+
+	return HealthCheckResponse{
+		Name:     redis.Name,
+		Type:     constant.ServiceRedis,
+		Host:     redis.Host,
+		Status:   status,
+		Error:    err,
+		ErrorMsg: errMsg,
 	}
 }

@@ -1,7 +1,7 @@
 package impl
 
 import (
-	outboundModel "base/internal/outbound/model"
+	outboundModel "base/internal/outbound/authentication/model"
 	"base/internal/usecase/model"
 	pkgHelper "base/pkg/helper"
 	"context"
@@ -12,7 +12,7 @@ func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err erro
 	span, ctx := pkgHelper.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
-	res, err := u.TaskRepository.GetAllTasks(ctx)
+	res, err := u.TaskDb.GetAllTasks(ctx)
 	if err != nil {
 		return
 	}
@@ -23,6 +23,7 @@ func (u *usecase) GetAllTasks(ctx context.Context) (tasks []model.Task, err erro
 		Password: "BSM123bsm",
 		AppName:  "Virtual Account",
 	})
+	// temporary print
 	fmt.Println(resAd)
 	fmt.Println(errAd)
 
@@ -41,10 +42,16 @@ func (u *usecase) GetTaskByID(ctx context.Context, id int64) (task model.Task, e
 	span, ctx := pkgHelper.UpdateCtxSpanUsecase(ctx)
 	defer span.End()
 
-	_, err = u.TaskRepository.GetTaskByID(ctx, id)
+	data, err := u.TaskDatalogic.GetTaskByID(ctx, id)
 	if err != nil {
-		return model.Task{}, err
+		return
 	}
 
-	return model.Task{}, nil
+	task = model.Task{
+		ID:     data.ID,
+		Title:  data.Title,
+		Status: data.Status,
+	}
+
+	return task, nil
 }
