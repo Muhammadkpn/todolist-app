@@ -10,7 +10,7 @@ This Golang boilerplate is designed to kickstart your project development using 
   ```
   go install github.com/vektra/mockery/v2@v2.41.0
   ```
-- [OAPICodegen](https://github.com/deepmap/oapi-codegen) for generating controller based on OpenAPI contract.
+- [OAPICodegen](https://github.com/oapi-codegen/oapi-codegen) for generating controller based on OpenAPI contract.
   ```
   go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest
   ```
