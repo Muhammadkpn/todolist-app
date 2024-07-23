@@ -1,7 +1,7 @@
 package model
 
 import (
-	obModel "base/internal/outbound/model"
+	obModel "base/internal/outbound/db/model"
 	"base/pkg/enums/petType"
 )
 

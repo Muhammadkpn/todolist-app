@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"base/internal/outbound/model"
+	"base/internal/outbound/authentication/model"
 	"context"
 )
 

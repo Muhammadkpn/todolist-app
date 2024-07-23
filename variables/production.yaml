@@ -1,15 +1,41 @@
 app:
+  name: sample-project
+  version: 1.0.0
+  base-path:
   port: 3031
-  host: person.host
-  write_timeout: 15
-  read_timeout: 15
-
+  gracefull-duration: 10s
 database:
-  host: db.host
-  port: 5432
-  username: admin
-  password: admin
-  schema: template
-
-feature_flag:
-  use_gorm: true
+  template:
+    name: template
+    driver: postgres
+    host: localhost
+    port: 6543
+    username: admin
+    password: admin
+    schema: template
+  oracle:
+    name: template
+    driver: oracle
+    host: 10.32.1.19
+    port: 1521
+    username: SIMASVIRTUALUAT
+    password: simasvirtual
+    schema: ORCL
+redis:
+  main:
+    name: main
+    host: localhost
+    port: 6379
+    username:
+    password:
+auth:
+  active_directory:
+    network: tcp
+    address:
+      - host: 10.22.103.178
+        port: 389
+      - host: 10.22.103.178
+        port: 389
+    username: golang1
+    password: BSM123bsm!
+    base_distinguish_name: DC=banksinarmas,DC=com

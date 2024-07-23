@@ -1,7 +1,7 @@
 package impl
 
 import (
-	dbModel "base/internal/outbound/model"
+	dbModel "base/internal/outbound/db/model"
 	"base/internal/usecase/model"
 	pkgHelper "base/pkg/helper"
 	"context"
@@ -15,7 +15,7 @@ func (u *usecase) CreateTask(ctx context.Context, title string) (task model.Task
 		Title: title,
 	}
 
-	res, err := u.TaskRepository.CreateTask(ctx, taskDb)
+	res, err := u.TaskDb.CreateTask(ctx, taskDb)
 	if err != nil {
 		return
 	}

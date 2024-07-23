@@ -7,5 +7,5 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	New(model.Database{}, pkgConfig.Config{})
+	New(model.Database{}, model.Redis{}, pkgConfig.Config{})
 }

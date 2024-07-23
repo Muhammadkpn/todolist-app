@@ -20,7 +20,7 @@ WORKDIR /app
 
 # Copy and download dependencies
 COPY . .
-RUN go mod tidy
+# RUN go mod tidy
 
 # Copy the source code
 #COPY . .
@@ -42,7 +42,7 @@ COPY --from=build /app/myapp .
 # COPY --from=build /app/logs ./logs
 
 # Set the timezone and install CA certificates
-RUN apk --no-cache add ca-certificates tzdata
+# RUN apk --no-cache add ca-certificates tzdata
 
 # Set the entrypoint command
 ENTRYPOINT ["/app/myapp"]

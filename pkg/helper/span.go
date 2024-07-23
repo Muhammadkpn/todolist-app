@@ -41,3 +41,7 @@ func UpdateCtxSpanController(ctx context.Context) (*apm.Span, context.Context) {
 func UpdateCtxSpanRepository(ctx context.Context) (*apm.Span, context.Context) {
 	return apm.StartSpan(ctx, GetCurrentFuncName(), "repository")
 }
+
+func UpdateCtxSpanDatalogic(ctx context.Context) (*apm.Span, context.Context) {
+	return apm.StartSpan(ctx, GetCurrentFuncName(), "datalogic")
+}
