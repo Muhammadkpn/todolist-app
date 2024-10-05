@@ -1,0 +1,232 @@
+openapi: 3.1.0
+x-stoplight:
+  id: h40dh9tndt78w
+info:
+  title: Labels
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /labels:
+    get:
+      summary: Get Labels
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponseLabels'
+                  - x-stoplight:
+                      id: lr4zrymt1izlr
+                    type: object
+                    properties:
+                      data:
+                        x-stoplight:
+                          id: 0z0j94k4mynog
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Labels'
+                          x-stoplight:
+                            id: ikc70drs808q0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+      operationId: get-labels
+      x-stoplight:
+        id: qh2my8panrk1d
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: user_id
+          description: filter by user_id
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: Authorization
+        required: true
+        description: Token JWT
+    post:
+      summary: Create New Label
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+      operationId: create-new-label
+      x-stoplight:
+        id: 5daoqpthqwhw1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - user_id
+              properties:
+                name:
+                  type: string
+                  x-stoplight:
+                    id: j9g33pqu3ucvq
+                user_id:
+                  type: integer
+                  x-stoplight:
+                    id: ay2ck6tq8ta4h
+  '/labels/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        in: header
+        name: Authorization
+        required: true
+    put:
+      summary: Edit label
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+      operationId: edit-label-by-ID
+      x-stoplight:
+        id: vn26rlz6jyzvz
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  x-stoplight:
+                    id: ng9dbdqrxxcjx
+    delete:
+      summary: Delete Label
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseLabels'
+      operationId: delete-label-by-ID
+      x-stoplight:
+        id: u3cmap7g5btnm
+components:
+  schemas:
+    BaseResponseLabels:
+      title: BaseResponseLabels
+      x-stoplight:
+        id: hz8ha3gzc9480
+      type: object
+      required:
+        - error_code
+        - error_message
+      properties:
+        error_code:
+          type: integer
+          x-stoplight:
+            id: y3h0jrz786jx0
+        error_message:
+          type: string
+          x-stoplight:
+            id: 9brcsjflrlrmp
+    Labels:
+      title: Labels
+      x-stoplight:
+        id: dvtp56cjgavgy
+      type: object
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: txvv7thg4mcnp
+        name:
+          type: string
+          x-stoplight:
+            id: m3e4gyedk35wn
+        user_id:
+          type: integer
+          x-stoplight:
+            id: wrktooe5dciyw
+        created_date:
+          type: string
+          x-stoplight:
+            id: 3lcz85cuglcal
+          format: date-time
+        created_by:
+          type: string
+          x-stoplight:
+            id: mbglkdyvr116k
+        updated_date:
+          type: string
+          x-stoplight:
+            id: hb9ok9um5nd18
+          format: date-time
+        updated_by:
+          type: string
+          x-stoplight:
+            id: knd6g5vtly8lg

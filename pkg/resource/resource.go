@@ -2,12 +2,12 @@ package resource
 
 import (
 	pkgConfig "base/pkg/config"
-	"base/pkg/resource/model"
 
 	sdkLog "gitlab.banksinarmas.com/go/sdkv2/log/logger"
 	sdkValidator "gitlab.banksinarmas.com/go/sdkv2/validator/validator"
 	sdkWebClient "gitlab.banksinarmas.com/go/sdkv2/webClient/webClient"
 	"go.uber.org/dig"
+	"gorm.io/gorm"
 )
 
 type (
@@ -24,6 +24,6 @@ type (
 
 		Validator sdkValidator.Validator
 
-		DatabaseSQL model.Database
+		DatabaseSQL *gorm.DB
 	}
 )

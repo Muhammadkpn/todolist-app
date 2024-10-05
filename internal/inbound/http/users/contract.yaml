@@ -1,0 +1,247 @@
+openapi: 3.1.0
+x-stoplight:
+  id: 5d2fx3vmypte5
+info:
+  title: Users
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/users/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        in: header
+        name: Authorization
+        required: true
+    get:
+      summary: Get User Info by User ID
+      tags: []
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponseUsers'
+                  - x-stoplight:
+                      id: jxxxj1tnoqo6k
+                    type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Users'
+                        x-stoplight:
+                          id: tzujziky8750g
+              examples: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+      operationId: get-users-by-userId
+      description: Retrieve the information of the user with the matching user ID.
+      x-stoplight:
+        id: xnldkj00jg5av
+    put:
+      summary: Update user
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponseUsers'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+      operationId: update-user
+      x-stoplight:
+        id: glaxebr9rw9st
+  /login:
+    post:
+      summary: Login User
+      operationId: login-user
+      responses:
+        '200':
+          description: User Login Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponseUsers'
+                  - type: object
+                    x-stoplight:
+                      id: 14wnd41ffa7wq
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Users'
+                        x-stoplight:
+                          id: 0evy15z1mhbd2
+              examples: {}
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usernameOrEmail
+                - password
+              properties:
+                usernameOrEmail:
+                  type: string
+                  x-stoplight:
+                    id: zhtk9c7avnisc
+                password:
+                  type: string
+                  x-stoplight:
+                    id: 5scxsupykb8xh
+            examples: {}
+        description: Post the necessary fields for the API to login user.
+      description: Create a new user.
+      x-stoplight:
+        id: wsuzk489zvwnk
+    parameters: []
+  /register:
+    post:
+      summary: Register User
+      operationId: register-user
+      responses:
+        '200':
+          description: User Login Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponseUsers'
+                  - type: object
+                    x-stoplight:
+                      id: 6ukrkx08u8vna
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Users'
+                        x-stoplight:
+                          id: oos9s9a3zbd0d
+              examples: {}
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseUsers'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+                  x-stoplight:
+                    id: lp9hsng9r213q
+            examples: {}
+        description: Post the necessary fields for the API to register user.
+      description: Create a new user.
+      x-stoplight:
+        id: naa4vx7obifik
+    parameters: []
+components:
+  schemas:
+    Users:
+      title: Users
+      type: object
+      x-stoplight:
+        id: nsmfekxfpt0iy
+      required:
+        - user_id
+        - username
+        - email
+      properties:
+        user_id:
+          type: integer
+          description: Unique identifier for the given user.
+          x-stoplight:
+            id: t44jdipx82v9w
+        username:
+          type: string
+          x-stoplight:
+            id: 8opd4a6i1agre
+        email:
+          type: string
+          x-stoplight:
+            id: pgzq4ug7h7mhl
+        jwt:
+          type: string
+          x-stoplight:
+            id: ex0b9qw18ekhz
+    BaseResponseUsers:
+      title: BaseResponseUsers
+      x-stoplight:
+        id: h4nmzwa9tzdh0
+      type: object
+      required:
+        - error_code
+        - error_message
+      properties:
+        error_code:
+          type: integer
+          x-stoplight:
+            id: 4bs23n4zew0kc
+        error_message:
+          type: string
+          x-stoplight:
+            id: bds3nazv7nfsn

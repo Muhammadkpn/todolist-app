@@ -1,31 +1,29 @@
 package injection
 
 import (
+	"base/internal/repository/db/model"
 	pkgConfig "base/pkg/config"
-	"base/pkg/resource/model"
 
 	"gorm.io/gorm"
 
-	oracle "github.com/godoes/gorm-oracle"
 	postgres "go.elastic.co/apm/module/apmgormv2/v2/driver/postgres"
 )
 
-// example with postgres and oracle, please comment unused database
-func NewDatabase(cfg pkgConfig.Config) (db model.Database, err error) {
-	template, err := gorm.Open(postgres.Open(cfg.Database.Template.GenerateConnectionString()), &gorm.Config{})
+func NewDatabase(cfg pkgConfig.Config) (db *gorm.DB, err error) {
+	connectionString := cfg.Database.GenerateConnectionString()
+	db, err = gorm.Open(postgres.Open(connectionString), &gorm.Config{})
 	if err != nil {
 		return
 	}
 
-	oracle, err := gorm.Open(oracle.Open(cfg.Database.Oracle.GenerateConnectionString()), &gorm.Config{})
-	if err != nil {
-		return
-	}
+	db = db.Debug()
+	// sqlDB, err := db.DB()
 
-	db = model.Database{
-		Template: template,
-		Oracle:   oracle,
-	}
+	// sqlDB.SetMaxOpenConns(100)
+	// sqlDB.SetMaxIdleConns(10)
+	//Use it when to want to run service the first time
+	db.AutoMigrate(&model.Label{}, &model.Task{}, &model.TaskLabel{}, &model.User{})
 
 	return
+
 }

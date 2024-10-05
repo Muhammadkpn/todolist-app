@@ -1,0 +1,406 @@
+openapi: 3.1.0
+x-stoplight:
+  id: gb1oy3v5rokpy
+info:
+  title: Tasks
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/tasks/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        in: header
+        name: Authorization
+        required: true
+    get:
+      summary: Get Tasks by ID
+      tags: []
+      responses:
+        '200':
+          description: Task found
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponseTasks'
+                    x-stoplight:
+                      id: xrv50yo8wxlb1
+                  - type: object
+                    x-stoplight:
+                      id: oubbh2j4emr7n
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Tasks'
+                        x-stoplight:
+                          id: yyebfbeomoc01
+              examples: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+      operationId: get-tasks-by-id
+      description: Retrieve detail tasks by ID
+      x-stoplight:
+        id: kfzxdmk7rff9h
+    put:
+      summary: Edit Task
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+      operationId: edit-tasks-by-id
+      x-stoplight:
+        id: ajv47eb9vgyfa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  x-stoplight:
+                    id: garj1m3gy1u0l
+                title:
+                  type: string
+                  x-stoplight:
+                    id: tnh5wbfvrf8aq
+                description:
+                  type: string
+                  x-stoplight:
+                    id: t8mvg3f38ecfu
+                status:
+                  type: string
+                  x-stoplight:
+                    id: s4s9xzx7wu4ge
+                due_date:
+                  type: string
+                  x-stoplight:
+                    id: 1ujihugg21x15
+                  format: date
+                labels:
+                  x-stoplight:
+                    id: 63kxx014r8ney
+                  type: array
+                  items:
+                    x-stoplight:
+                      id: gcqlcur29ache
+                    type: integer
+    delete:
+      summary: Delete Task
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+      operationId: delete-tasks-by-id
+      x-stoplight:
+        id: 707b9bn7hhf4n
+  /tasks:
+    post:
+      summary: Create New Task
+      operationId: create-task
+      responses:
+        '200':
+          description: Task Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+              examples: {}
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponseTasks'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - description
+                - status
+              properties:
+                title:
+                  type: string
+                  x-stoplight:
+                    id: is9lj6cbece26
+                description:
+                  type: string
+                  x-stoplight:
+                    id: wnz5i6awkt6ok
+                status:
+                  type: string
+                  x-stoplight:
+                    id: 8iluu2xwbod7x
+                due_date:
+                  type: string
+                  format: date
+                  x-stoplight:
+                    id: 1yb3ivdn93c3p
+                labels:
+                  type: array
+                  x-stoplight:
+                    id: u1a4ql0obt456
+                  items:
+                    x-stoplight:
+                      id: 870kg0kcl3fti
+                    type: integer
+            examples:
+              Example 1:
+                value:
+                  title: string
+                  description: string
+                  status: string
+                  due_date: '2019-08-24'
+                  labels:
+                    - 0
+        description: Post the necessary fields for the API to create a new task.
+      description: Create a new user.
+      x-stoplight:
+        id: lm7l014cb8ei3
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: Authorization
+        required: true
+    get:
+      summary: Get Tasks
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponseTasks'
+                  - type: object
+                    x-stoplight:
+                      id: c18182o1u3xdz
+                    properties:
+                      data:
+                        type: array
+                        x-stoplight:
+                          id: sc41hvgjwavpq
+                        items:
+                          $ref: '#/components/schemas/Tasks'
+                          x-stoplight:
+                            id: qpf7pqlcnjt1j
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/BaseResponseTasks'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/BaseResponseTasks'
+      operationId: get-tasks
+      x-stoplight:
+        id: aw4e0jvxal0gh
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: status
+          description: filter task by status
+        - schema:
+            type: string
+          in: query
+          name: label
+          description: filter task by label
+        - schema:
+            type: string
+          in: query
+          name: sort_by
+          description: sort by date or title
+        - schema:
+            type: string
+          in: query
+          name: order_by
+          description: order desc or asc
+        - schema:
+            type: string
+          in: query
+          name: user_id
+components:
+  schemas:
+    Tasks:
+      title: Tasks
+      type: object
+      x-stoplight:
+        id: 4b9ss8jxs27x9
+      required:
+        - id
+        - title
+        - status
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given task.
+          x-stoplight:
+            id: agt8ggbvkmoyj
+        title:
+          type: string
+          x-stoplight:
+            id: l6e57nljsxycp
+        description:
+          type: string
+          x-stoplight:
+            id: o4azo9b0m6jtd
+        status:
+          type: string
+          x-stoplight:
+            id: 0k7ys0a3wifya
+        due_date:
+          type: string
+          format: date-time
+          x-stoplight:
+            id: b8y925iy9lrda
+        user_id:
+          type: integer
+          x-stoplight:
+            id: 45c7gshm90vgq
+        labels:
+          type: array
+          x-stoplight:
+            id: w0snxcp21kaxb
+          items:
+            $ref: '#/components/schemas/DataLabels'
+            x-stoplight:
+              id: jxp9er8g4k70m
+        created_date:
+          type: string
+          x-stoplight:
+            id: 72m4s9bwp5b9c
+          format: date-time
+        created_by:
+          type: string
+          x-stoplight:
+            id: wk7jzi5vn2tuw
+        updated_date:
+          type: string
+          format: date-time
+          x-stoplight:
+            id: qmao6qyflakrg
+        updated_by:
+          type: string
+          x-stoplight:
+            id: fnj2vzq5xoskz
+    DataLabels:
+      title: DataLabels
+      x-stoplight:
+        id: qw9ppg6d7456r
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: mdlwel53jrjja
+        name:
+          type: string
+          x-stoplight:
+            id: iroarsqta4xh7
+        user_id:
+          type: integer
+          x-stoplight:
+            id: 9v6kyp06o2l5l
+        created_date:
+          type: string
+          x-stoplight:
+            id: kmndobl969q8g
+          format: date-time
+        created_by:
+          type: string
+          x-stoplight:
+            id: w6nrriqxf00zv
+        updated_date:
+          type: string
+          x-stoplight:
+            id: x686xf595jchv
+          format: date-time
+        updated_by:
+          type: string
+          x-stoplight:
+            id: eqpe32dgxr0y0
+    BaseResponseTasks:
+      title: BaseResponseTasks
+      x-stoplight:
+        id: ky84gvsq1iigf
+      type: object
+      required:
+        - error_code
+        - error_message
+      properties:
+        error_code:
+          type: integer
+          x-stoplight:
+            id: 3azkpzpco0i4t
+        error_message:
+          type: string
+          x-stoplight:
+            id: 4um42g89yizbc

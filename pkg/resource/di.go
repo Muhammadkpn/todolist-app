@@ -20,10 +20,6 @@ func Register(container *dig.Container) error {
 		return fmt.Errorf("[DI] cannot initialize Database: %+v", err)
 	}
 
-	if err := container.Provide(injection.NewRedis); err != nil {
-		return fmt.Errorf("[DI] cannot initialize Database: %+v", err)
-	}
-
 	if err := container.Provide(injection.NewLogger); err != nil {
 		return fmt.Errorf("[DI] cannot initialize Logger: %+v", err)
 	}

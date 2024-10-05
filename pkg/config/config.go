@@ -9,10 +9,11 @@ import (
 
 type (
 	Config struct {
-		AppConfig AppConfig  `yaml:"app"`
-		Database  Database   `yaml:"database"`
-		Auth      AuthConfig `yaml:"auth"`
-		Redis     Redis      `yaml:"redis"`
+		AppConfig   AppConfig  `yaml:"app"`
+		Database    Database   `yaml:"database"`
+		Auth        AuthConfig `yaml:"auth"`
+		Redis       Redis      `yaml:"redis"`
+		TokenSecret string     `yaml:"token-secret"`
 	}
 )
 

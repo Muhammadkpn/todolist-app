@@ -5,22 +5,11 @@ app:
   port: 3031
   gracefull-duration: 10s
 database:
-  template:
-    name: template
-    driver: postgres
-    host: localhost
-    port: 6543
-    username: admin
-    password: admin
-    schema: template
-  oracle:
-    name: template
-    driver: oracle
-    host: 10.32.1.19
-    port: 1521
-    username: SIMASVIRTUALUAT
-    password: simasvirtual
-    schema: ORCL
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+  schema: todolist
 redis:
   main:
     name: main

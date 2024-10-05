@@ -3,9 +3,8 @@ package pkgDi
 import (
 	"sync"
 
-	"base/internal/datalogic"
-	"base/internal/outbound"
-	usecase "base/internal/usecase"
+	"base/internal/repository"
+	usecase "base/internal/usecases"
 	pkgConfig "base/pkg/config"
 	pkgResource "base/pkg/resource"
 
@@ -38,17 +37,12 @@ func Container() (*dig.Container, error) {
 			return
 		}
 
-		if err := outbound.Register(container); err != nil {
+		if err := repository.Register(container); err != nil {
 			outer = err
 
 			return
 		}
 
-		if err := datalogic.Register(container); err != nil {
-			outer = err
-
-			return
-		}
 	})
 
 	if outer != nil {

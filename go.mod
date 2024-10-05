@@ -33,6 +33,16 @@ require (
 )
 
 require (
+	github.com/elastic/go-licenser v0.3.1 // indirect
+	github.com/jcchavezs/porto v0.1.0 // indirect
+	github.com/santhosh-tekuri/jsonschema v1.2.4 // indirect
+	go.elastic.co/apm/module/apmzap v1.15.0 // indirect
+	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5 // indirect
+	golang.org/x/mod v0.8.0 // indirect
+	golang.org/x/tools v0.6.0 // indirect
+)
+
+require (
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/bytedance/sonic v1.11.3 // indirect
@@ -57,6 +67,7 @@ require (
 	github.com/gojek/heimdall/v7 v7.0.2 // indirect
 	github.com/gojek/valkyrie v0.0.0-20180215180059-6aee720afcdf // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/invopop/yaml v0.2.0 // indirect
@@ -98,7 +109,9 @@ require (
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
+	gitlab.banksinarmas.com/go/sdkv2/log v1.0.0
 	gitlab.banksinarmas.com/go/sdkv2/mandatory v1.0.0 // indirect
+	go.elastic.co/apm v1.15.0
 	go.elastic.co/apm/module/apmechov4/v2 v2.6.0 // indirect
 	go.elastic.co/apm/module/apmhttp/v2 v2.6.0 // indirect
 	go.elastic.co/apm/module/apmsql/v2 v2.6.0 // indirect
